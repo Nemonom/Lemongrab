@@ -10,9 +10,9 @@ logo_time = 0.0
 
 
 def enter():
-    global image
+    global logo
     open_canvas(1000, 700)
-    image = load_image('logo.png')
+    logo = load_image('logo.png')
 
 def exit():
     global image
@@ -28,11 +28,11 @@ def update():
         game_framework.push_state((main_state))
     delay(0.01)
     logo_time += 0.01
-
+    
 def draw():
-    global image
+    global logo
     clear_canvas()
-    image.draw(500, 350)
+    logo.draw(500, 350)
     update_canvas()
 
 def handle_events():
