@@ -1,3 +1,4 @@
+
 class GameState:
     def __init__(self, state):
         self.enter = state.enter
@@ -11,7 +12,6 @@ class GameState:
 
 
 class TestGameState:
-
     def __init__(self, name):
         self.name = name
 
@@ -80,6 +80,7 @@ def quit():
 
 def run(start_state):
     global running, stack
+
     running = True
     stack = [start_state]
     start_state.enter()

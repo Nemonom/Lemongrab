@@ -1,20 +1,27 @@
+import global_parameters
 import game_framework
+import mouse_pointer
 from pico2d import *
 
 
 name = "main_state"
 image = None
-
+main_pointer = None
+width = global_parameters.width
+height = global_parameters.height
 
 def enter():
     global background
+    global main_pointer
+    main_pointer = mouse_pointer.pointer()
+    main_pointer.__init__()
     background = load_image('main.png')
-
 
 def exit():
     global background
+    global main_pointer
     del(background)
-
+    del(main_pointer)
 
 def handle_events():
     events = get_events()
@@ -28,7 +35,9 @@ def handle_events():
 
 def draw():
     clear_canvas()
-    background.draw(500, 350)
+    hide_cursor()
+    background.draw(width/2, height/2)
+    main_pointer.draw()
     update_canvas()
 
 
@@ -37,6 +46,7 @@ def draw():
 
 
 def update():
+    main_pointer.update()
     pass
 
 
