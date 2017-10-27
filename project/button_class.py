@@ -11,19 +11,22 @@ class button:
     mouse_on = False
 
     def __init__(self, name, x_local, y_local, x_size, y_size):
-        if button.button_img == None:
-            button.button_img = load_image(name)
+        self.button_img = load_image(name)
         self.m_x = x_local
         self.m_y = y_local
         self.s_x = x_size
         self.s_y = y_size
 
     def draw(self):
-        self.button_img.draw(self.m_x, self.m_y
+        if self.mouse_on:
+            self.button_img.draw(self.m_x, self.m_y
+                                 , self.s_x * 2 +10, self.s_y * 2+10)
+        else:
+            self.button_img.draw(self.m_x, self.m_y
                              , self.s_x * 2, self.s_y * 2)
 
-        if self.mouse_on:
-            self.button_img.draw(500, 500, 500, 500)
+
+
 
     def mousemove_on(self, mouse_x, mouse_y):
         if(self.m_x - self.s_x <= mouse_x and mouse_x <= self.m_x + self.s_x and self.m_y - self.s_y <= mouse_y and mouse_y <= self.m_y + self.s_y):
