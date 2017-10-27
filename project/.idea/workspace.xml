@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="button_class.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="button_class.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/button_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            <state relative-caret-position="53">
+              <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -47,15 +47,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main_state.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main_state.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="828">
-              <caret line="36" column="18" lean-forward="false" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+            <state relative-caret-position="253">
+              <caret line="22" column="70" lean-forward="true" selection-start-line="22" selection-start-column="70" selection-end-line="22" selection-end-column="70" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="exit_button.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/exit_button.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -72,9 +79,11 @@
       <file leaf-file-name="mouse_pointer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mouse_pointer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="253">
+              <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,15 +111,15 @@
         <option value="$PROJECT_DIR$/help_state.py" />
         <option value="$PROJECT_DIR$/global_parameters.py" />
         <option value="$PROJECT_DIR$/mouse_pointer.py" />
-        <option value="$PROJECT_DIR$/main_state.py" />
         <option value="$PROJECT_DIR$/object_class.py" />
         <option value="$PROJECT_DIR$/button_class.py" />
+        <option value="$PROJECT_DIR$/main_state.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="478" />
-    <option name="y" value="22" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="245" />
+    <option name="y" value="43" />
     <option name="width" value="1400" />
     <option name="height" value="985" />
   </component>
@@ -146,7 +155,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../2017-2DGP/Labs/Lab06 - AI" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../2017-2DGP/Labs/Lab03" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -239,7 +248,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="478" y="22" width="1400" height="985" extended-state="1" />
+    <frame x="245" y="43" width="1400" height="985" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2496382" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -552,21 +561,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_state.py">
+    <entry file="file://$PROJECT_DIR$/mouse_pointer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="36" column="18" lean-forward="false" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+        <state relative-caret-position="253">
+          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mouse_pointer.py">
+    <entry file="file://$PROJECT_DIR$/global_parameters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="20" />
+        <state relative-caret-position="115">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exit_button.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/button_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -580,18 +604,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/global_parameters.py">
+    <entry file="file://$PROJECT_DIR$/main_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/button_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        <state relative-caret-position="253">
+          <caret line="22" column="70" lean-forward="true" selection-start-line="22" selection-start-column="70" selection-end-line="22" selection-end-column="70" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
