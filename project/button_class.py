@@ -2,20 +2,13 @@ import global_parameters
 from pico2d import *
 
 class button:
-    button_img = None
-    m_x = 0
-    m_y = 0
-    s_x = 0
-    s_y = 0
-
-    mouse_on = False
-
     def __init__(self, name, x_local, y_local, x_size, y_size):
         self.button_img = load_image(name)
         self.m_x = x_local
         self.m_y = y_local
         self.s_x = x_size
         self.s_y = y_size
+        self.mouse_on = False
 
     def draw(self):
         if self.mouse_on:

@@ -9,7 +9,6 @@ from pico2d import *
 
 name = "help_state"
 image = None
-main_pointer = None
 exit_but = None
 width = global_parameters.width
 height = global_parameters.height
