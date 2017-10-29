@@ -2,8 +2,8 @@ import global_parameters
 from pico2d import *
 
 class pointer:
+    x, y = 0, 0
     def __init__(self):
-        self.x, self.y = 500, 350
         self.image1 = load_image('lemon.png')
         self.image2 = load_image('lemon.png')
 

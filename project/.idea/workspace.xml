@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="help_state.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="help_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/help_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+            <state relative-caret-position="186">
+              <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="38" selection-end-column="57" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -23,26 +23,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="object_class.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/object_class.py">
+      <file leaf-file-name="level_state.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/level_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="117">
+              <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#24#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="button_class.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/button_class.py">
+      <file leaf-file-name="global_parameters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/global_parameters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="207">
+              <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -50,21 +48,11 @@
       <file leaf-file-name="main_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+            <state relative-caret-position="92">
+              <caret line="52" column="57" lean-forward="true" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logo_state.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/logo_state.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="38" column="8" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="47" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -83,25 +71,25 @@
       <list>
         <option value="$PROJECT_DIR$/start_state.py" />
         <option value="$PROJECT_DIR$/title_state.py" />
-        <option value="$PROJECT_DIR$/level_state.py" />
         <option value="$PROJECT_DIR$/shop_state.py" />
         <option value="$PROJECT_DIR$/game_state.py" />
         <option value="$PROJECT_DIR$/play.py" />
         <option value="$PROJECT_DIR$/game_framework.py" />
         <option value="$PROJECT_DIR$/logo_state.py" />
-        <option value="$PROJECT_DIR$/global_parameters.py" />
-        <option value="$PROJECT_DIR$/mouse_pointer.py" />
         <option value="$PROJECT_DIR$/object_class.py" />
-        <option value="$PROJECT_DIR$/help_state.py" />
         <option value="$PROJECT_DIR$/button_class.py" />
+        <option value="$PROJECT_DIR$/help_state.py" />
+        <option value="$PROJECT_DIR$/mouse_pointer.py" />
         <option value="$PROJECT_DIR$/main_state.py" />
+        <option value="$PROJECT_DIR$/global_parameters.py" />
+        <option value="$PROJECT_DIR$/level_state.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="245" />
-    <option name="y" value="43" />
-    <option name="width" value="1400" />
+    <option name="x" value="252" />
+    <option name="y" value="14" />
+    <option name="width" value="1565" />
     <option name="height" value="985" />
   </component>
   <component name="ProjectView">
@@ -229,10 +217,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="245" y="43" width="1400" height="985" extended-state="0" />
+    <frame x="252" y="14" width="1565" height="985" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2496382" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22301228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -484,13 +472,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/level_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lemon.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -522,30 +503,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mouse_pointer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/global_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/object_class.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -553,16 +516,6 @@
     <entry file="file://$PROJECT_DIR$/exit_button.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/button_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/logo_state.py">
@@ -573,10 +526,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_state.py">
+    <entry file="file://$PROJECT_DIR$/button_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state relative-caret-position="253">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#24#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mouse_pointer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
@@ -585,8 +548,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/help_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        <state relative-caret-position="186">
+          <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="38" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="52" column="57" lean-forward="true" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/global_parameters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/level_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>

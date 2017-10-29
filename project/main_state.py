@@ -1,6 +1,7 @@
 import global_parameters
 import game_framework
 import help_state
+import level_state
 import mouse_pointer
 import button_class
 
@@ -51,11 +52,14 @@ def handle_events():
             start_but.mousemove_on(event.x, 700 - event.y)
             help_but.mousemove_on(event.x, 700 - event.y)
 
-        if exit_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
-            game_framework.quit()
+        if start_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
+            game_framework.change_state(level_state)
 
-        if help_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
+        elif help_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
             game_framework.change_state(help_state)
+
+        elif exit_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
+            game_framework.quit()
 
         elif event.type == SDL_QUIT:
             game_framework.quit()
