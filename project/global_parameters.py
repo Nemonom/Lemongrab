@@ -4,7 +4,6 @@ height = 700
 mouse_pointer_size = 30
 
 game_level = 0
-game_money = 0
 
 #shop
 shop_hp_level, shop_att_level, shop_item_level = 1, 1, 1
@@ -23,3 +22,9 @@ mon_att, mon_stat, mon_spd = 5, 20, 5
 hp_item, mp_item = 5, 5
 
 #UI
+icon_size_x, icon_size_y = 200, 100
+icon_status = 0
+
+collect_lemon = 0
+
+coin_size_x, coin_size_y, collect_coin = 200, 100, 0

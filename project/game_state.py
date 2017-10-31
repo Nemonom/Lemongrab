@@ -17,7 +17,7 @@ def enter():
     global option_but
 
     main_pointer = mouse_pointer.pointer()
-    option_but = button_class.button('option_button.png', 960, 670, 25, 25)
+    option_but = button_class.button('option_button.png', 970, 665, 25, 25)
 
 
 def exit():
@@ -63,6 +63,11 @@ def resume():
 
 
 
+def UI_init():
 
+    pass
 
+def UI_draw():
+
+    pass
 
