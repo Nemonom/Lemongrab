@@ -10,6 +10,14 @@ shop_hp_level, shop_att_level, shop_item_level = 1, 1, 1
 my_money = 0
 
 
+#camera
+move_x = 0
+move_y = 0
+
+
+#tile
+tile_size_x, tile_size_y = 150, 150
+
 #object
 player_size_x, player_size_y = 10, 10
 player_att, player_hp, player_mp, player_spd = 5, 50, 50, 5

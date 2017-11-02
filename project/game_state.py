@@ -11,18 +11,24 @@ name = "game_state"
 option_but = None
 width = global_parameters.width
 height = global_parameters.height
+player_hp, player_mp = 0, 0
 
 def enter():
     global main_pointer
-    global option_but
+
+    UI_init()
 
     main_pointer = mouse_pointer.pointer()
-    option_but = button_class.button('option_button.png', 970, 665, 25, 25)
+
+
 
 
 def exit():
     global main_pointer
     global option_but
+
+    global_parameters.move_x = 0
+    global_parameters.move_y = 0
 
     del(main_pointer)
     del(option_but)
@@ -64,7 +70,10 @@ def resume():
 
 
 def UI_init():
+    global option_but
+    option_but = button_class.button('option_button.png', 970, 665, 25, 25)
 
+    player_hp = global_parameters.player_hp
     pass
 
 def UI_draw():

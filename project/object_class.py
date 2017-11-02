@@ -21,6 +21,8 @@ class player:
 class enemy:
     size_x, size_y = None, None
 
+    WAITING, RELAX, CHASE, ATTACK, GET_ATTACK = 0, 1, 2, 3, 4
+
     def __init__(self):
         if enemy.img == None:
             img = load_image('enemy.png')
