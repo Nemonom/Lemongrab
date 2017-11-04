@@ -51,21 +51,25 @@ def exit():
 def handle_events():
     events = get_events()
     for event in events:
-        if event.type == SDL_MOUSEMOTION:
-            level_exit_but.mousemove_on(event.x, 700 - event.y)
-            easy_but.mousemove_on(event.x, 700 - event.y)
-            hard_but.mousemove_on(event.x, 700 - event.y)
+        level_exit_but.mousemove_on(event.x, 700 - event.y)
+        easy_but.mousemove_on(event.x, 700 - event.y)
+        hard_but.mousemove_on(event.x, 700 - event.y)
 
-        if easy_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
-            global_parameters.game_level = 0
-            game_framework.change_state(game_state)
+        if ((event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT)):
+            if easy_but.get_mouse_on():
+                global_parameters.game_level = 0
+                game_framework.change_state(game_state)
+                break
 
-        elif hard_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
-            global_parameters.game_level = 1
-            game_framework.change_state(game_state)
+            if hard_but.get_mouse_on():
+                global_parameters.game_level = 1
+                game_framework.change_state(game_state)
+                break
 
-        elif level_exit_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
-            game_framework.change_state(main_state)
+            if level_exit_but.get_mouse_on():
+                game_framework.change_state(main_state)
+                break
+
 
         if event.type == SDL_QUIT:
             game_framework.quit()
