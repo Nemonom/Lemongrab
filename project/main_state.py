@@ -45,6 +45,10 @@ def exit():
     del(help_but)
 
 def handle_events():
+    global start_but
+    global help_but
+    global exit_but
+
     events = get_events()
     for event in events:
 

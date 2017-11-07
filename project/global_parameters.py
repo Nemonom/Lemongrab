@@ -6,13 +6,9 @@ mouse_pointer_size = 30
 game_level = 0
 
 #shop
-shop_hp_level, shop_att_level, shop_item_level = 1, 1, 1
+shop_def_level, shop_att_level, shop_item_level = 1, 1, 1
 my_money = 0
 
-
-#camera
-move_x = 0
-move_y = 0
 
 
 #tile

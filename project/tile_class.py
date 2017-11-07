@@ -12,4 +12,11 @@ class tile:
         self.m_y = y_local
 
     def draw(self):
+        self.img.draw(self.m_x, self.m_y
+                      , tile.size_x * 2, tile.size_y * 2)
+        pass
+
+    def update(self, camera_x, camera_y):
+        self.m_x += camera_x
+        self.m_y += camera_y
         pass
