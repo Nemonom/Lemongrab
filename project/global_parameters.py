@@ -25,9 +25,6 @@ mon_att, mon_stat, mon_spd = 5, 20, 5
 hp_item, mp_item = 5, 5
 
 #UI
-icon_size_x, icon_size_y = 200, 100
-icon_status = 0
+icon_size_x, icon_size_y = 100, 100
 
-collect_lemon = 0
-
-coin_size_x, coin_size_y, collect_coin = 200, 100, 0
+ect_size_x, ect_size_y= 35, 35

@@ -14,7 +14,7 @@ class tile:
 
     def draw(self):
         self.img.draw(self.m_x, self.m_y
-                      , tile.size_x * 2, tile.size_y * 2)
+                      , tile.size_x, tile.size_y)
         pass
 
     def update(self, camera_x, camera_y):
