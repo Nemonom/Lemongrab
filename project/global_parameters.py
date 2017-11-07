@@ -10,7 +10,6 @@ shop_def_level, shop_att_level, shop_item_level = 1, 1, 1
 my_money = 0
 
 
-
 #tile
 tile_size_x, tile_size_y = 150, 150
 

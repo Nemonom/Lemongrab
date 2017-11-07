@@ -48,28 +48,29 @@ def handle_events():
     global start_but
     global help_but
     global exit_but
+    global main_pointer
 
     events = get_events()
     for event in events:
 
-        start_but.mousemove_on(event.x, 700 - event.y)
-        help_but.mousemove_on(event.x, 700 - event.y)
-        exit_but.mousemove_on(event.x, 700 - event.y)
-
-        if ((event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT)):
-            if start_but.get_mouse_on():
-                game_framework.change_state(level_state)
-                break
-            if help_but.get_mouse_on():
-                game_framework.change_state(help_state)
-                break
-            if exit_but.get_mouse_on():
-                game_framework.quit()
-
-        elif event.type == SDL_QUIT:
+        if event.type == SDL_QUIT:
             game_framework.quit()
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
-                game_framework.quit()
+
+        elif event.type in (SDL_MOUSEBUTTONUP, SDL_MOUSEBUTTONDOWN, SDL_MOUSEMOTION):
+            main_pointer.update(event.x, 700 - event.y)
+            start_but.mousemove_on(event.x, 700 - event.y)
+            help_but.mousemove_on(event.x, 700 - event.y)
+            exit_but.mousemove_on(event.x, 700 - event.y)
+
+            if event.button == SDL_BUTTON_LEFT:
+                if start_but.get_mouse_on():
+                    game_framework.change_state(level_state)
+                    break
+                if help_but.get_mouse_on():
+                    game_framework.change_state(help_state)
+                    break
+                if exit_but.get_mouse_on():
+                    game_framework.quit()
 
 
 def draw():
@@ -88,8 +89,6 @@ def draw():
 
 
 def update():
-    main_pointer.update()
-
     pass
 
 

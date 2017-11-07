@@ -3,6 +3,7 @@ from pico2d import *
 
 class tile:
     size_x, size_y = global_parameters.tile_size_x, global_parameters.tile_size_y
+    move_x, move_y = 0, 0
 
     def __init__(self, name, state, x_local, y_local):
         if(state):

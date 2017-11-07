@@ -8,11 +8,8 @@ class pointer:
 
         self.x, self.y = 0, 0
 
-    def update(self):
-        events = get_events()
-        for event in events:
-            if event.type == SDL_MOUSEMOTION:
-                self.x, self.y = event.x, 700 - event.y
+    def update(self, event_x, event_y):
+        self.x, self.y = event_x, event_y
 
     def draw(self, a):
         if a == 0:

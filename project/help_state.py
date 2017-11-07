@@ -8,7 +8,7 @@ from pico2d import *
 
 
 name = "help_state"
-image = None
+background = None
 exit_but = None
 width = global_parameters.width
 height = global_parameters.height
@@ -32,19 +32,27 @@ def exit():
     del(exit_but)
 
 def handle_events():
+    global exit_but
+
     events = get_events()
     for event in events:
-        if event.type == SDL_MOUSEMOTION:
-            exit_but.mousemove_on(event.x, 700 - event.y)
-
-        if exit_but.get_mouse_on() == True and (event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT):
-            game_framework.change_state(main_state)
-
         if event.type == SDL_QUIT:
             game_framework.quit()
 
+        elif event.type in (SDL_MOUSEBUTTONUP, SDL_MOUSEBUTTONDOWN, SDL_MOUSEMOTION):
+            main_pointer.update(event.x, 700 - event.y)
+            exit_but.mousemove_on(event.x, 700 - event.y)
+
+            if event.button == SDL_BUTTON_LEFT:
+                if exit_but.get_mouse_on():
+                    game_framework.change_state(main_state)
+
+
 
 def draw():
+    global background
+    global main_pointer
+    global exit_but
     clear_canvas()
     hide_cursor()
     background.draw(width/2, height/2)
@@ -53,12 +61,8 @@ def draw():
     update_canvas()
 
 
-
-
-
-
 def update():
-    main_pointer.update()
+
     pass
 
 

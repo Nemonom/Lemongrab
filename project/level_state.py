@@ -49,33 +49,42 @@ def exit():
     pass
 
 def handle_events():
+    global main_pointer
+    global level_exit_but
+    global easy_but
+    global hard_but
+
     events = get_events()
     for event in events:
-        level_exit_but.mousemove_on(event.x, 700 - event.y)
-        easy_but.mousemove_on(event.x, 700 - event.y)
-        hard_but.mousemove_on(event.x, 700 - event.y)
-
-        if ((event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT)):
-            if easy_but.get_mouse_on():
-                global_parameters.game_level = 0
-                game_framework.change_state(game_state)
-                break
-
-            if hard_but.get_mouse_on():
-                global_parameters.game_level = 1
-                game_framework.change_state(game_state)
-                break
-
-            if level_exit_but.get_mouse_on():
-                game_framework.change_state(main_state)
-                break
-
 
         if event.type == SDL_QUIT:
             game_framework.quit()
-    pass
+
+        elif event.type in (SDL_MOUSEBUTTONUP, SDL_MOUSEBUTTONDOWN, SDL_MOUSEMOTION):
+            main_pointer.update(event.x, 700 - event.y)
+            easy_but.mousemove_on(event.x, 700 - event.y)
+            hard_but.mousemove_on(event.x, 700 - event.y)
+            level_exit_but.mousemove_on(event.x, 700 - event.y)
+
+            if event.button == SDL_BUTTON_LEFT:
+                if easy_but.get_mouse_on():
+                    global_parameters.game_level = 0
+                    game_framework.change_state(game_state)
+                    break
+                if hard_but.get_mouse_on():
+                    global_parameters.game_level = 1
+                    game_framework.change_state(game_state)
+                    break
+                if level_exit_but.get_mouse_on():
+                    game_framework.change_state(main_state)
+
 
 def draw():
+    global background
+    global main_pointer
+    global level_exit_but
+    global easy_but
+    global hard_but
     clear_canvas()
     hide_cursor()
     background.draw(width/2, height/2)
@@ -91,7 +100,6 @@ def draw():
 
 
 def update():
-    main_pointer.update()
     pass
 
 
