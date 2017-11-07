@@ -4,7 +4,7 @@ from pico2d import *
 class pointer:
     def __init__(self):
         self.image1 = load_image('lemon.png')
-        self.image2 = load_image('lemon.png')
+        self.image2 = load_image('dot.png')
 
         self.x, self.y = 0, 0
 
@@ -17,4 +17,4 @@ class pointer:
                             , global_parameters.mouse_pointer_size, global_parameters.mouse_pointer_size)
         elif a == 1:
             self.image2.draw(self.x, self.y
-                            , global_parameters.mouse_pointer_size, global_parameters.mouse_pointer_size)
+                            , global_parameters.mouse_pointer_size-15, global_parameters.mouse_pointer_size-15)

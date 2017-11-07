@@ -13,7 +13,6 @@ name = "game_state"
 option_but = None
 width = global_parameters.width
 height = global_parameters.height
-player_hp, player_mp = 0, 0
 goal_lemon = 0
 collect_lemon = 0
 lemon_img = None
@@ -33,7 +32,7 @@ def enter():
     global camera
 
     camera = camera_class.camera()
-    test = tile_class.tile("lemon.png", 1, 500, 500)
+    test = tile_class.tile("lemon.png", 1, 100, 100)
     UI_init()
 
     main_pointer = mouse_pointer.pointer()
@@ -125,9 +124,6 @@ def UI_init():
 
     option_but = button_class.button('option_button.png', 970, 665, 25, 25)
 
-    player_hp = global_parameters.player_hp
-    player_mp = global_parameters.player_mp
-
     collect_lemon = 0
     if global_parameters.game_level == 0:
         goal_lemon = 3
@@ -136,10 +132,9 @@ def UI_init():
 
     lemon_img = load_image('lemon.png')
     b_lemon_img = load_image('b_lemon.png')
-
     money_img = load_image('money.png')
-    normal_state_img = load_image('normal_state')
-    attack_state_img = load_image('attack_state')
+    normal_state_img = load_image('normal_state.png')
+    attack_state_img = load_image('attack_state.png')
 
     pass
 
@@ -147,6 +142,9 @@ def UI_draw():
     global goal_lemon
     global lemon_img
     global b_lemon_img
+    global money_img
+    global normal_state_img
+    global attack_state_img
 
     for i in range(goal_lemon):
         if i < collect_lemon:
@@ -156,6 +154,8 @@ def UI_draw():
             b_lemon_img.draw(25 + (i * 40), 25
                             , global_parameters.ect_size_x, global_parameters.ect_size_x)
 
+    normal_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
+    money_img.draw(100, 580, global_parameters.ect_size_x, global_parameters.ect_size_y)
 
     pass
 
