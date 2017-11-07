@@ -50,30 +50,25 @@ def handle_events():
 
     events = get_events()
     for event in events:
-
         if event.type == SDL_QUIT:
             game_framework.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.quit()
+
+        elif event.type in (SDL_MOUSEBUTTONUP, SDL_MOUSEBUTTONDOWN, SDL_MOUSEMOTION):
+            main_pointer.update(event.x, 700 - event.y)
+            option_but.mousemove_on(event.x, 700 - event.y)
+
+            if event.button == SDL_BUTTON_LEFT:
+                if option_but.get_mouse_on():
+                    game_framework.change_state(main_state)
 
         else:
-            if event.type in (SDL_MOUSEMOTION, SDL_MOUSEBUTTONDOWN, SDL_MOUSEBUTTONUP):
-                option_but.mousemove_on(event.x, 700 - event.y)
-            if (option_but.get_mouse_on() == True) and ((event.type, event.button) == (SDL_MOUSEBUTTONDOWN, SDL_BUTTON_LEFT)):
-               game_framework.change_state(main_state)
-
-
-
-
-
-
-
-
-
-
+            camera.handle_event(event)
 
 
 def draw():
+    global test
+    global main_pointer
+    global option_but
     clear_canvas()
     hide_cursor()
     main_pointer.draw(1)
@@ -83,7 +78,11 @@ def draw():
     pass
 
 def update():
+    global camera
+    global test
 
+    camera.update()
+    test.update(camera.return_x(), camera.return_y())
     pass
 
 
