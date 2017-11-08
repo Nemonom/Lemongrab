@@ -88,10 +88,10 @@ def draw():
     clear_canvas()
     hide_cursor()
     background.draw(width/2, height/2)
-    main_pointer.draw(0)
     level_exit_but.draw()
     easy_but.draw()
     hard_but.draw()
+    main_pointer.draw(0)
     update_canvas()
     pass
 

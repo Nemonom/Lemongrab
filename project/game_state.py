@@ -1,13 +1,13 @@
-import global_parameters
-import game_framework
-import main_state
-import mouse_pointer
-import button_class
-import tile_class
-import camera_class
-
 from pico2d import *
 
+import button_class
+import camera_class
+import game_framework
+import global_parameters
+import main_state
+import mouse_pointer
+import tile_class
+import object_class
 
 name = "game_state"
 option_but = None
@@ -20,16 +20,21 @@ b_lemon_img = None
 money_img = None
 normal_state_img = None
 attack_state_img = None
+hp_bar_img = None
+mp_bar_img = None
+
 
 camera = None
 
 test = None
 
 
+
 def enter():
     global main_pointer
     global test
     global camera
+    global player
 
     camera = camera_class.camera()
     test = tile_class.tile("lemon.png", 1, 100, 100)
@@ -37,6 +42,7 @@ def enter():
 
     main_pointer = mouse_pointer.pointer()
 
+    player = object_class.player()
 
 def exit():
     global main_pointer
@@ -48,6 +54,9 @@ def exit():
     global money_img
     global normal_state_img
     global attack_state_img
+    global hp_bar_img
+    global mp_bar_img
+    global player
 
     del(main_pointer)
     del(option_but)
@@ -58,7 +67,9 @@ def exit():
     del money_img
     del normal_state_img
     del attack_state_img
-
+    del hp_bar_img
+    del mp_bar_img
+    del player
 def handle_events():
     global camera
     global option_but
@@ -86,10 +97,10 @@ def draw():
     global option_but
     clear_canvas()
     hide_cursor()
-    main_pointer.draw(1)
+    test.draw()
     UI_draw()
     option_but.draw()
-    test.draw()
+    main_pointer.draw(1)
     update_canvas()
     pass
 
@@ -121,6 +132,8 @@ def UI_init():
     global money_img
     global normal_state_img
     global attack_state_img
+    global hp_bar_img
+    global mp_bar_img
 
     option_but = button_class.button('option_button.png', 970, 665, 25, 25)
 
@@ -135,7 +148,8 @@ def UI_init():
     money_img = load_image('money.png')
     normal_state_img = load_image('normal_state.png')
     attack_state_img = load_image('attack_state.png')
-
+    hp_bar_img = load_image('hp_bar.png')
+    mp_bar_img = load_image('mp_bar.png')
     pass
 
 def UI_draw():
@@ -145,6 +159,8 @@ def UI_draw():
     global money_img
     global normal_state_img
     global attack_state_img
+    global hp_bar_img
+    global mp_bar_img
 
     for i in range(goal_lemon):
         if i < collect_lemon:
@@ -155,7 +171,9 @@ def UI_draw():
                             , global_parameters.ect_size_x, global_parameters.ect_size_x)
 
     normal_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
-    money_img.draw(100, 580, global_parameters.ect_size_x, global_parameters.ect_size_y)
+    money_img.draw(100, 590, global_parameters.ect_size_x, global_parameters.ect_size_y)
+    mp_bar_img.draw(80+player.return_mp()*2, 630, player.return_mp()*4, global_parameters.icon_size_y/3)
+    hp_bar_img.draw(80+player.return_hp()*2, 660, player.return_hp()*4, global_parameters.icon_size_y/3)
 
     pass
 

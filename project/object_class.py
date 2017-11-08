@@ -1,12 +1,11 @@
-import  global_parameters
+import global_parameters
+import cmath
 import random
-import math
 from pico2d import *
-
 
 class player:
     def __init__(self):
-        self.img = load_image('player.png')
+        self.img = load_image('lemon.png')
         self.hp = global_parameters.player_hp
         self.mp = global_parameters.player_mp
         self.spd = global_parameters.player_spd
@@ -20,9 +19,14 @@ class player:
         self.img.rotate_draw(self.angle, 500, 350, self.size_x, self.size_y)
 
     def get_angle(self, event_x, event_y):
-        self.angle = math.atan(event_x/event_y)
+        self.angle = cmath.atan(event_x/event_y)
         pass
 
+    def return_hp(self):
+        return self.hp
+
+    def return_mp(self):
+        return self.mp
 
 
 class enemy:
@@ -34,5 +38,13 @@ class enemy:
         if enemy.img == None:
             img = load_image('enemy.png')
         enemy.size_x, enemy.size_y = global_parameters.mon_size_x, global_parameters.mon_size_y
+
+
+
+class item:
+    
+    def __init__(self):
+
+    pass
 
 

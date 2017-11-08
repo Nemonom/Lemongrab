@@ -77,10 +77,10 @@ def draw():
     clear_canvas()
     hide_cursor()
     background.draw(width/2, height/2)
-    main_pointer.draw(0)
     exit_but.draw()
     start_but.draw()
     help_but.draw()
+    main_pointer.draw(0)
     update_canvas()
 
 
