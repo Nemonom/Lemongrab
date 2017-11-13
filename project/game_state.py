@@ -22,7 +22,7 @@ normal_state_img = None
 attack_state_img = None
 hp_bar_img = None
 mp_bar_img = None
-
+player = None
 
 camera = None
 
@@ -81,6 +81,7 @@ def handle_events():
 
         elif event.type in (SDL_MOUSEBUTTONUP, SDL_MOUSEBUTTONDOWN, SDL_MOUSEMOTION):
             main_pointer.update(event.x, 700 - event.y)
+            player.get_angle(event.x, 700 - event.y)
             option_but.mousemove_on(event.x, 700 - event.y)
 
             if event.button == SDL_BUTTON_LEFT:
@@ -95,8 +96,11 @@ def draw():
     global test
     global main_pointer
     global option_but
+    global player
+
     clear_canvas()
     hide_cursor()
+    player.draw()
     test.draw()
     UI_draw()
     option_but.draw()

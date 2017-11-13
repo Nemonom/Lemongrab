@@ -11,10 +11,10 @@ my_money = 0
 
 
 #tile
-tile_size_x, tile_size_y = 150, 150
+tile_size_x, tile_size_y = 100, 100
 
 #object
-player_size_x, player_size_y = 10, 10
+player_size_x, player_size_y = 80, 80
 player_att, player_hp, player_mp, player_spd = 5, 50, 50, 5
 
 
