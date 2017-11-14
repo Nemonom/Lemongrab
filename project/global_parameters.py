@@ -1,8 +1,18 @@
+#timer
+PIXEL_PER_METER = (10.0 / 0.3)
+RUN_SPEED_KMPH = 30.0
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
+RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
+#window
 width = 1000
 height = 700
 
+#mouse
 mouse_pointer_size = 30
 
+#level
 game_level = 0
 
 #shop
@@ -15,11 +25,11 @@ tile_size_x, tile_size_y = 100, 100
 
 #object
 player_size_x, player_size_y = 80, 80
-player_att, player_hp, player_mp, player_spd = 5, 50, 50, 5
+player_att, player_hp, player_mp, player_spd = 5, 100, 100, RUN_SPEED_PPS
 
 
 mon_size_x, mon_size_y = 10, 20
-mon_att, mon_stat, mon_spd = 5, 20, 5
+mon_hp, mon_att, mon_spd = 20, 5, 5
 
 
 hp_item, mp_item = 5, 5

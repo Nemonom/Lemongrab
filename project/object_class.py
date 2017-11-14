@@ -4,13 +4,13 @@ import game_state
 import random
 from pico2d import *
 
+#player class
 class player:
 
     def __init__(self):
         self.img = load_image('normal_state.png')
         self.hp = global_parameters.player_hp
         self.mp = global_parameters.player_mp
-        self.spd = global_parameters.player_spd
         self.att = global_parameters.player_att
         self.size_x = global_parameters.player_size_x
         self.size_y = global_parameters.player_size_y
@@ -40,7 +40,7 @@ class player:
             , self.x + self.size_x / 2, self.y + self.size_y / 2
 
 
-
+#enemy class
 class enemy:
     size_x, size_y = None, None
     img = None
@@ -52,7 +52,7 @@ class enemy:
         enemy.size_x, enemy.size_y = global_parameters.mon_size_x, global_parameters.mon_size_y
 
 
-
+#item class
 class item:
     size_x, size_y = None, None
 
@@ -80,13 +80,16 @@ class item:
 
 
 
+#bullet class
 class bullet:
     size_x, size_y = None, None
+    img = None
 
     def __init__(self, x, y, event_x, event_y):
         self.x, self.y = global_parameters.width/2, global_parameters.height/2
         self.angle = math.atan2((global_parameters.height/2 - event_y) , (global_parameters.width/2 - event_x))
-         self.img = load_image('lemon.png')
+        if bullet.img == None:
+           bullet.img = load_image('bullet.png')
 
     def update(self):
         pass

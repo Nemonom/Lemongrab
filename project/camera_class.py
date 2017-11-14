@@ -44,18 +44,18 @@ class camera:
     pass
 
 
-    def update(self):
+    def update(self, frame_time):
         if self.hor_state == self.RIGHT:
-            camera.move_x = -1
+            camera.move_x = -frame_time * global_parameters.RUN_SPEED_PPS
         elif self.hor_state == self.LEFT:
-            camera.move_x = +1
+            camera.move_x = +frame_time * global_parameters.RUN_SPEED_PPS
         elif self.hor_state == self.STOP:
             camera.move_x = 0
 
         if self.ver_state == self.UP:
-            camera.move_y = -1
+            camera.move_y = -frame_time * global_parameters.RUN_SPEED_PPS
         elif self.ver_state == self.DOWN:
-            camera.move_y = +1
+            camera.move_y = +frame_time * global_parameters.RUN_SPEED_PPS
         elif self.ver_state == self.STOP:
             camera.move_y = 0
     pass

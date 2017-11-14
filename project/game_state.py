@@ -112,7 +112,9 @@ def update():
     global camera
     global test
 
-    camera.update()
+    frame_time = get_frame_time()
+
+    camera.update(frame_time)
     test.update(camera.return_x(), camera.return_y())
     pass
 
@@ -176,8 +178,21 @@ def UI_draw():
 
     normal_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
     money_img.draw(100, 590, global_parameters.ect_size_x, global_parameters.ect_size_y)
-    mp_bar_img.draw(80+player.return_mp()*2, 630, player.return_mp()*4, global_parameters.icon_size_y/3)
-    hp_bar_img.draw(80+player.return_hp()*2, 660, player.return_hp()*4, global_parameters.icon_size_y/3)
+    mp_bar_img.draw(80+player.return_mp(), 630, player.return_mp()*2, global_parameters.icon_size_y/3)
+    hp_bar_img.draw(80+player.return_hp(), 660, player.return_hp()*2, global_parameters.icon_size_y/3)
 
     pass
 
+
+
+
+current_time = 0.0
+
+
+def get_frame_time():
+
+    global current_time
+
+    frame_time = get_time() - current_time
+    current_time += frame_time
+    return frame_time
