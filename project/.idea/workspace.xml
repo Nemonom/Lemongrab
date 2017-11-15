@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="object_class.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="object_class.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/object_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" column="45" lean-forward="false" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
+            <state relative-caret-position="194">
+              <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mouse_pointer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mouse_pointer.py">
+      <file leaf-file-name="tile_class.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tile_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="161">
+              <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -36,8 +36,8 @@
       <file leaf-file-name="global_parameters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/global_parameters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="27" column="57" lean-forward="false" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+            <state relative-caret-position="621">
+              <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -46,18 +46,18 @@
       <file leaf-file-name="camera_class.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/camera_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+            <state relative-caret-position="194">
+              <caret line="52" column="29" lean-forward="false" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game_state.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="168" column="21" lean-forward="true" selection-start-line="168" selection-start-column="21" selection-end-line="168" selection-end-column="21" />
+            <state relative-caret-position="-1766">
+              <caret line="90" column="21" lean-forward="true" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -88,17 +88,17 @@
         <option value="$PROJECT_DIR$/main_state.py" />
         <option value="$PROJECT_DIR$/level_state.py" />
         <option value="$PROJECT_DIR$/help_state.py" />
-        <option value="$PROJECT_DIR$/tile_class.py" />
-        <option value="$PROJECT_DIR$/object_class.py" />
         <option value="$PROJECT_DIR$/camera_class.py" />
         <option value="$PROJECT_DIR$/global_parameters.py" />
+        <option value="$PROJECT_DIR$/object_class.py" />
+        <option value="$PROJECT_DIR$/tile_class.py" />
         <option value="$PROJECT_DIR$/game_state.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="52" />
-    <option name="y" value="28" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="222" />
+    <option name="y" value="42" />
     <option name="width" value="1565" />
     <option name="height" value="993" />
   </component>
@@ -117,8 +117,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,7 +227,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="52" y="28" width="1565" height="993" extended-state="1" />
+    <frame x="222" y="42" width="1565" height="993" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18616678" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -557,21 +557,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tile_class.py">
+    <entry file="file://$PROJECT_DIR$/game_framework.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="19" column="111" lean-forward="false" selection-start-line="19" selection-start-column="111" selection-end-line="19" selection-end-column="111" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/object_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="45" lean-forward="false" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="176">
+          <caret line="85" column="23" lean-forward="true" selection-start-line="85" selection-start-column="23" selection-end-line="85" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -583,36 +572,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game_framework.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="85" column="23" lean-forward="true" selection-start-line="85" selection-start-column="23" selection-end-line="85" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/camera_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+        <state relative-caret-position="194">
+          <caret line="52" column="29" lean-forward="false" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/global_parameters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="27" column="57" lean-forward="false" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+        <state relative-caret-position="621">
+          <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tile_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="168" column="21" lean-forward="true" selection-start-line="168" selection-start-column="21" selection-end-line="168" selection-end-column="21" />
+        <state relative-caret-position="-1766">
+          <caret line="90" column="21" lean-forward="true" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/object_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

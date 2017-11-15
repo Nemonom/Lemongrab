@@ -8,7 +8,7 @@ from pico2d import *
 class player:
 
     def __init__(self):
-        self.img = load_image('normal_state.png')
+        self.img = load_image('head.png')
         self.hp = global_parameters.player_hp
         self.mp = global_parameters.player_mp
         self.att = global_parameters.player_att
@@ -46,10 +46,19 @@ class enemy:
     img = None
     RELAX, CHASE, ATTACK = 0, 1, 2
 
-    def __init__(self):
+    def __init__(self, m_x, m_y):
         if enemy.img == None:
             img = load_image('enemy.png')
         enemy.size_x, enemy.size_y = global_parameters.mon_size_x, global_parameters.mon_size_y
+        self.dir_x, self.dir_y = 0, 0
+        self.x, self.y = m_x, m_y
+        self.hp = global_parameters.mon_hp
+        self.att = global_parameters.mon_att
+        self.spd = global_parameters.RUN_SPEED_PPS * (global_parameters.game_level + 1)
+
+    def camera_update(self, camera_x, camera_y):
+        self.x += camera_x
+        self.y += camera_y
 
 
 #item class
@@ -91,8 +100,14 @@ class bullet:
         if bullet.img == None:
            bullet.img = load_image('bullet.png')
 
-    def update(self):
+    def update(self, frame_time):
+        self.x += frame_time * global_parameters.RUN_SPEED_PPS * 2
+        self.y = self.x * self.angle
         pass
+
+    def camera_update(self, camera_x, camera_y):
+        self.x += camera_x
+        self.y += camera_y
 
     def draw(self):
         self.img.rotate_draw(self.angle, 500, 350, self.size_x, self.size_y)

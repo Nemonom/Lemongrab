@@ -25,7 +25,7 @@ tile_size_x, tile_size_y = 100, 100
 
 #object
 player_size_x, player_size_y = 80, 80
-player_att, player_hp, player_mp, player_spd = 5, 100, 100, RUN_SPEED_PPS
+player_att, player_hp, player_mp = 5, 100, 100
 
 
 mon_size_x, mon_size_y = 10, 20

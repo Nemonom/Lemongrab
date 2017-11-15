@@ -23,9 +23,10 @@ attack_state_img = None
 hp_bar_img = None
 mp_bar_img = None
 player = None
+player_get_attack = False
+get_attack_time_cnt = 0
 
 camera = None
-
 test = None
 
 
@@ -37,7 +38,7 @@ def enter():
     global player
 
     camera = camera_class.camera()
-    test = tile_class.tile("lemon.png", 1, 100, 100)
+    test = tile_class.tile(1, 100, 100)
     UI_init()
 
     main_pointer = mouse_pointer.pointer()
@@ -87,6 +88,8 @@ def handle_events():
             if event.button == SDL_BUTTON_LEFT:
                 if option_but.get_mouse_on():
                     game_framework.change_state(main_state)
+                else:
+                    pass
 
         else:
             camera.handle_event(event)
@@ -116,6 +119,8 @@ def update():
 
     camera.update(frame_time)
     test.update(camera.return_x(), camera.return_y())
+
+    player_get_attack_time(frame_time)
     pass
 
 
@@ -176,7 +181,10 @@ def UI_draw():
             b_lemon_img.draw(25 + (i * 40), 25
                             , global_parameters.ect_size_x, global_parameters.ect_size_x)
 
-    normal_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
+    if player_get_attack:
+        attack_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
+    else:
+        normal_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
     money_img.draw(100, 590, global_parameters.ect_size_x, global_parameters.ect_size_y)
     mp_bar_img.draw(80+player.return_mp(), 630, player.return_mp()*2, global_parameters.icon_size_y/3)
     hp_bar_img.draw(80+player.return_hp(), 660, player.return_hp()*2, global_parameters.icon_size_y/3)
@@ -196,3 +204,16 @@ def get_frame_time():
     frame_time = get_time() - current_time
     current_time += frame_time
     return frame_time
+
+def player_get_attack_time(frame_time):
+    global get_attack_time_cnt
+    global player_get_attack
+
+    if player_get_attack:
+        get_attack_time_cnt += frame_time
+
+        if get_attack_time_cnt >= 1:
+            get_attack_time_cnt = 0
+            player_get_attack = False
+
+    pass
