@@ -13,18 +13,23 @@ name = "game_state"
 option_but = None
 width = global_parameters.width
 height = global_parameters.height
+
 goal_lemon = 0
 collect_lemon = 0
 lemon_img = None
 b_lemon_img = None
+
 money_img = None
 normal_state_img = None
 attack_state_img = None
 hp_bar_img = None
 mp_bar_img = None
+
 player = None
 player_get_attack = False
 get_attack_time_cnt = 0
+
+bullets = None
 
 camera = None
 test = None
@@ -36,6 +41,7 @@ def enter():
     global test
     global camera
     global player
+    global bullets
 
     camera = camera_class.camera()
     test = tile_class.tile(1, 100, 100)
@@ -44,36 +50,27 @@ def enter():
     main_pointer = mouse_pointer.pointer()
 
     player = object_class.player()
+    bullets = []
 
 def exit():
     global main_pointer
-    global option_but
     global test
     global camera
-    global lemon_img
-    global b_lemon_img
-    global money_img
-    global normal_state_img
-    global attack_state_img
-    global hp_bar_img
-    global mp_bar_img
     global player
+    global bullets
 
-    del(main_pointer)
-    del(option_but)
-    del(test)
-    del(camera)
-    del(lemon_img)
-    del(b_lemon_img)
-    del money_img
-    del normal_state_img
-    del attack_state_img
-    del hp_bar_img
-    del mp_bar_img
+    UI_exit()
+
+    del main_pointer
+    del test
+    del camera
     del player
+    del bullets
+
 def handle_events():
     global camera
     global option_but
+    global bullets
 
     events = get_events()
     for event in events:
@@ -89,7 +86,12 @@ def handle_events():
                 if option_but.get_mouse_on():
                     game_framework.change_state(main_state)
                 else:
-                    pass
+                    if event.type == SDL_MOUSEBUTTONDOWN:
+                        bullet = object_class.bullet(event.x, 700 - event.y)
+                        bullets.append(bullet)
+
+
+
 
         else:
             camera.handle_event(event)
@@ -100,10 +102,13 @@ def draw():
     global main_pointer
     global option_but
     global player
+    global bullets
 
     clear_canvas()
     hide_cursor()
     player.draw()
+    for bullet in bullets:
+        bullet.draw()
     test.draw()
     UI_draw()
     option_but.draw()
@@ -114,11 +119,16 @@ def draw():
 def update():
     global camera
     global test
+    global bullets
 
     frame_time = get_frame_time()
 
     camera.update(frame_time)
     test.update(camera.return_x(), camera.return_y())
+
+    for bullet in bullets:
+        bullet.camera_update(camera.return_x(), camera.return_y())
+        bullet.update(frame_time)
 
     player_get_attack_time(frame_time)
     pass
@@ -190,6 +200,31 @@ def UI_draw():
     hp_bar_img.draw(80+player.return_hp(), 660, player.return_hp()*2, global_parameters.icon_size_y/3)
 
     pass
+
+
+
+def UI_exit():
+    global option_but
+    global lemon_img
+    global b_lemon_img
+    global money_img
+    global normal_state_img
+    global attack_state_img
+    global hp_bar_img
+    global mp_bar_img
+
+
+    del option_but
+    del lemon_img
+    del b_lemon_img
+    del money_img
+    del normal_state_img
+    del attack_state_img
+    del hp_bar_img
+    del mp_bar_img
+    pass
+
+
 
 
 

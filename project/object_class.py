@@ -54,7 +54,7 @@ class enemy:
         self.x, self.y = m_x, m_y
         self.hp = global_parameters.mon_hp
         self.att = global_parameters.mon_att
-        self.spd = global_parameters.RUN_SPEED_PPS * (global_parameters.game_level + 1)
+        self.spd = global_parameters.MON_RUN_SPEED_PPS * (global_parameters.game_level+1)
 
     def camera_update(self, camera_x, camera_y):
         self.x += camera_x
@@ -63,7 +63,6 @@ class enemy:
 
 #item class
 class item:
-    size_x, size_y = None, None
 
     def __init__(self, what, x, y):
         self.type = what
@@ -75,12 +74,15 @@ class item:
         elif what == 2:
             self.img = load_image('mp.png')
 
-
     def return_type(self):
         return self.type
 
     def draw(self):
-        self.img.draw(self.x, self.y, item.size_x, item.size_y)
+        self.img.draw(self.x, self.y, global_parameters.item_size, global_parameters.item_size)
+
+    def camera_update(self, camera_x, camera_y):
+        self.x += camera_x
+        self.y += camera_y
 
     def get_bb(self):
         return self.x - item.size_x/2, self.y - item.size_y/2, self.x + item.size_x/2, self.y + item.size_y/2
@@ -94,15 +96,23 @@ class bullet:
     size_x, size_y = None, None
     img = None
 
-    def __init__(self, x, y, event_x, event_y):
+    def __init__(self, event_x, event_y):
         self.x, self.y = global_parameters.width/2, global_parameters.height/2
+        bullet.size_x, bullet.size_y = global_parameters.item_size, global_parameters.item_size
         self.angle = math.atan2((global_parameters.height/2 - event_y) , (global_parameters.width/2 - event_x))
+        self.update_angle = (global_parameters.height/2 - event_y) / (global_parameters.width/2 - event_x)
+        self.update_pos = event_y - (event_x * self.update_angle)
+        if event_x <= global_parameters.width/2:
+            self.dir = -1
+        elif event_x > global_parameters.width/2:
+            self.dir = 1
+
         if bullet.img == None:
            bullet.img = load_image('bullet.png')
 
     def update(self, frame_time):
-        self.x += frame_time * global_parameters.RUN_SPEED_PPS * 2
-        self.y = self.x * self.angle
+        self.x += self.dir * frame_time * global_parameters.RUN_SPEED_PPS * 2
+        self.y = self.x * self.update_angle + self.update_pos
         pass
 
     def camera_update(self, camera_x, camera_y):
@@ -110,7 +120,7 @@ class bullet:
         self.y += camera_y
 
     def draw(self):
-        self.img.rotate_draw(self.angle, 500, 350, self.size_x, self.size_y)
+        self.img.rotate_draw(self.angle, self.x, self.y, self.size_x, self.size_y)
 
     def get_bb(self):
         return self.x - item.size_x/2, self.y - item.size_y/2, self.x + item.size_x/2, self.y + item.size_y/2
