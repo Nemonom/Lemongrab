@@ -93,26 +93,20 @@ class item:
 
 #bullet class
 class bullet:
-    size_x, size_y = None, None
     img = None
 
     def __init__(self, event_x, event_y):
         self.x, self.y = global_parameters.width/2, global_parameters.height/2
-        bullet.size_x, bullet.size_y = global_parameters.item_size, global_parameters.item_size
-        self.angle = math.atan2((global_parameters.height/2 - event_y) , (global_parameters.width/2 - event_x))
-        self.update_angle = (global_parameters.height/2 - event_y) / (global_parameters.width/2 - event_x)
-        self.update_pos = event_y - (event_x * self.update_angle)
-        if event_x <= global_parameters.width/2:
-            self.dir = -1
-        elif event_x > global_parameters.width/2:
-            self.dir = 1
+        self.size_x, self.size_y = global_parameters.item_size, global_parameters.item_size
+        self.angle = math.atan2((event_y - global_parameters.height/2) , ( event_x - global_parameters.width/2))
+
 
         if bullet.img == None:
            bullet.img = load_image('bullet.png')
 
     def update(self, frame_time):
-        self.x += self.dir * frame_time * global_parameters.RUN_SPEED_PPS * 2
-        self.y = self.x * self.update_angle + self.update_pos
+        self.x += math.cos(self.angle) * frame_time * global_parameters.RUN_SPEED_PPS
+        self.y += math.sin(self.angle) * frame_time * global_parameters.RUN_SPEED_PPS
         pass
 
     def camera_update(self, camera_x, camera_y):
@@ -123,4 +117,4 @@ class bullet:
         self.img.rotate_draw(self.angle, self.x, self.y, self.size_x, self.size_y)
 
     def get_bb(self):
-        return self.x - item.size_x/2, self.y - item.size_y/2, self.x + item.size_x/2, self.y + item.size_y/2
+        return self.x - self.size_x/2, self.y - self.size_y/2, self.x + self.size_x/2, self.y + self.size_y/2
