@@ -20,6 +20,9 @@ lemon_img = None
 b_lemon_img = None
 
 money_img = None
+font = None
+collect_money = 0
+
 normal_state_img = None
 attack_state_img = None
 hp_bar_img = None
@@ -30,6 +33,9 @@ player_get_attack = False
 get_attack_time_cnt = 0
 
 bullets = None
+
+items = None
+
 
 camera = None
 test = None
@@ -42,6 +48,7 @@ def enter():
     global camera
     global player
     global bullets
+    global items
 
     camera = camera_class.camera()
     test = tile_class.tile(1, 100, 100)
@@ -51,6 +58,7 @@ def enter():
 
     player = object_class.player()
     bullets = []
+    items = []
 
 def exit():
     global main_pointer
@@ -58,7 +66,7 @@ def exit():
     global camera
     global player
     global bullets
-
+    global items
     UI_exit()
 
     del main_pointer
@@ -66,6 +74,7 @@ def exit():
     del camera
     del player
     del bullets
+    del items
 
 def handle_events():
     global camera
@@ -90,11 +99,19 @@ def handle_events():
                         bullet = object_class.bullet(event.x, 700 - event.y)
                         bullets.append(bullet)
 
-
-
-
         else:
             camera.handle_event(event)
+            #치트키
+            if event.type == SDL_KEYDOWN:
+                if event.key == SDLK_F1:
+                    player.control_hp('-', 10)
+                elif event.key == SDLK_F2:
+                    player.control_mp('-', 10)
+                elif event.key == SDLK_F3:
+                    player.control_hp('+', 10)
+                elif event.key == SDLK_F4:
+                    player.control_mp('+', 10)
+
 
 
 def draw():
@@ -151,6 +168,7 @@ def UI_init():
     global lemon_img
     global b_lemon_img
     global money_img
+    global font
     global normal_state_img
     global attack_state_img
     global hp_bar_img
@@ -167,6 +185,9 @@ def UI_init():
     lemon_img = load_image('lemon.png')
     b_lemon_img = load_image('b_lemon.png')
     money_img = load_image('money.png')
+    if font == None:
+        font = load_font('Alice_in_Wonderland.ttf', 20)
+
     normal_state_img = load_image('normal_state.png')
     attack_state_img = load_image('attack_state.png')
     hp_bar_img = load_image('hp_bar.png')
@@ -178,6 +199,8 @@ def UI_draw():
     global lemon_img
     global b_lemon_img
     global money_img
+    global font
+    global collect_money
     global normal_state_img
     global attack_state_img
     global hp_bar_img
@@ -196,18 +219,18 @@ def UI_draw():
     else:
         normal_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
     money_img.draw(100, 590, global_parameters.ect_size_x, global_parameters.ect_size_y)
+    font.draw(120, 590, 'X %d' % collect_money, (50, 50, 50))
     mp_bar_img.draw(80+player.return_mp(), 630, player.return_mp()*2, global_parameters.icon_size_y/3)
     hp_bar_img.draw(80+player.return_hp(), 660, player.return_hp()*2, global_parameters.icon_size_y/3)
 
     pass
-
-
 
 def UI_exit():
     global option_but
     global lemon_img
     global b_lemon_img
     global money_img
+    global font
     global normal_state_img
     global attack_state_img
     global hp_bar_img
@@ -218,6 +241,7 @@ def UI_exit():
     del lemon_img
     del b_lemon_img
     del money_img
+    del font
     del normal_state_img
     del attack_state_img
     del hp_bar_img
