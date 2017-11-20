@@ -48,8 +48,8 @@ class player:
         return self.mp
 
     def get_bb(self):
-        return global_parameters.width/2 - self.size_x / 2, global_parameters.height/2 - self.size_y / 2\
-            , global_parameters.width/2 + self.size_x / 2, global_parameters.height/2 + self.size_y / 2
+        return global_parameters.width/2 - self.size_x / 4, global_parameters.height/2 - self.size_y / 4\
+            , global_parameters.width/2 + self.size_x / 4, global_parameters.height/2 + self.size_y / 4
 
 
 #enemy class
@@ -116,8 +116,6 @@ class item:
                 and 0 <= self.m_y + global_parameters.item_size \
                 and self.m_y - global_parameters.item_size <= global_parameters.height:
             return True
-        else:
-            print("asdf")
 
 #bullet class
 class bullet:

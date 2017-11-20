@@ -33,9 +33,8 @@ player_get_attack = False
 get_attack_time_cnt = 0
 
 bullets = None
-
 items = None
-
+tiles = None
 
 camera = None
 test = None
@@ -49,26 +48,34 @@ def enter():
     global player
     global bullets
     global items
+    global tiles
 
     UI_init()
     camera = camera_class.camera()
-    test = tile_class.tile(1, 100, 100)
     main_pointer = mouse_pointer.pointer()
     player = object_class.player()
     bullets = []
     items = [object_class.item(i, 100 * i, 200 * i) for i in range(4)]
+    tiles = []
+    test = tile_class.tile(1, 100, 100)
+    tiles.append(test)
 
 def exit():
     global main_pointer
-    global test
+    global tiles
     global camera
     global player
     global bullets
     global items
+    global collect_money
+
+    global_parameters.my_money += collect_money
+    collect_money = 0
+
     UI_exit()
 
     del main_pointer
-    del test
+    del tiles
     del camera
     del player
     del bullets
@@ -113,7 +120,7 @@ def handle_events():
 
 
 def draw():
-    global test
+    global tiles
     global main_pointer
     global option_but
     global player
@@ -123,11 +130,12 @@ def draw():
     clear_canvas()
     hide_cursor()
     player.draw()
-    for item in items:
-        item.draw()
     for bullet in bullets:
         bullet.draw()
-    test.draw()
+    for item in items:
+        item.draw()
+    for tile in tiles:
+        tile.draw()
     UI_draw()
     option_but.draw()
     main_pointer.draw(1)
@@ -136,17 +144,24 @@ def draw():
 
 def update():
     global camera
-    global test
+    global tiles
     global bullets
     global items
     global player
     global collect_lemon
     global collect_money
 
+    player_collision = False
     frame_time = get_frame_time()
-
     camera.update(frame_time)
-    test.update(camera.return_x(), camera.return_y())
+
+    new_x, new_y = 0, 0
+
+    for tile in tiles:
+        tile.update(camera.return_x(), camera.return_y())
+        if tile.if_camera() and collision(player, tile):
+            new_x, new_y = wall_collision(player, tile, camera.return_x(), camera.return_y())
+
     for item in items:
         item.camera_update(camera.return_x(), camera.return_y())
         if item.if_camera(): # 카메라 안에 있는 아이템 충돌체크
@@ -156,16 +171,22 @@ def update():
                 elif item.return_type() == 1:
                     player.control_hp('+', global_parameters.hp_item)
                 elif item.return_type() == 2:
-                    player.control_hp('+', global_parameters.mp_item)
+                    player.control_mp('+', global_parameters.mp_item)
                 elif item.return_type() == 3:
                     collect_money += 100
 
                 items.remove(item)
 
     for bullet in bullets:
-        bullet.camera_update(camera.return_x(), camera.return_y())
         bullet.update(frame_time)
+        bullet.camera_update(camera.return_x(), camera.return_y())
 
+    for tile in tiles:
+        tile.update(new_x * camera.return_x(), new_y * camera.return_y())
+    for item in items:
+        item.camera_update(new_x * camera.return_x(), new_y * camera.return_y())
+    for bullet in bullets:
+        bullet.camera_update(new_x * camera.return_x(), new_y * camera.return_y())
 
 
     player_get_attack_time(frame_time)
@@ -304,4 +325,39 @@ def collision(a, b):
     if bottom_a > top_b: return False
 
     return True
-    pass
+
+
+def wall_collision(a, b, dir_x, dir_y):
+
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+
+    stop_x = 0
+    stop_y = 0
+
+    inter_w, inter_h = 0, 0
+
+    if dir_x < 0 and left_b < right_a:
+        inter_w = right_a - left_b
+    elif dir_x > 0 and left_a < right_b:
+        inter_w = right_b - left_a
+    if dir_y < 0 and bottom_b < top_a:
+        inter_h = top_a - bottom_b
+    elif dir_y > 0 and bottom_a < top_b:
+        inter_h = top_b - bottom_a
+
+
+    if dir_x < 0 and left_b < right_a:
+        stop_x = -1
+    elif dir_x > 0 and left_a < right_b:
+        stop_x = -1
+    if dir_y < 0 and bottom_b < top_a:
+        stop_y = -1
+    elif dir_y > 0 and bottom_a < top_b:
+        stop_y = -1
+
+    return stop_x, stop_y

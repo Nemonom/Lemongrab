@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="object_class.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="object_class.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/object_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="127" column="95" lean-forward="false" selection-start-line="127" selection-start-column="95" selection-end-line="127" selection-end-column="95" />
+            <state relative-caret-position="483">
+              <caret line="51" column="57" lean-forward="false" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
                 <element signature="e#1625#2572#0" expanded="false" />
@@ -27,8 +27,8 @@
       <file leaf-file-name="tile_class.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tile_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+            <state relative-caret-position="436">
+              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -37,8 +37,8 @@
       <file leaf-file-name="global_parameters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/global_parameters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="797">
-              <caret line="45" column="30" lean-forward="true" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+            <state relative-caret-position="337">
+              <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -47,25 +47,29 @@
       <file leaf-file-name="camera_class.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/camera_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="52" column="29" lean-forward="false" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+            <state relative-caret-position="648">
+              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game_state.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game_state.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="210" column="53" lean-forward="true" selection-start-line="210" selection-start-column="53" selection-end-line="210" selection-end-column="53" />
+            <state relative-caret-position="341">
+              <caret line="136" column="22" lean-forward="true" selection-start-line="136" selection-start-column="22" selection-end-line="136" selection-end-column="22" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-                <element signature="e#4952#6129#0" expanded="false" />
-                <element signature="e#6150#6535#0" expanded="false" />
-                <element signature="e#6588#6704#0" expanded="false" />
-                <element signature="e#6750#6996#0" expanded="false" />
-                <element signature="e#7023#7297#0" expanded="false" />
+                <element signature="e#648#1066#0" expanded="false" />
+                <element signature="e#1084#1399#0" expanded="false" />
+                <element signature="e#1426#2683#0" expanded="false" />
+                <element signature="e#3116#4710#0" expanded="false" />
+                <element signature="e#4781#5669#0" expanded="false" />
+                <element signature="e#5690#6867#0" expanded="false" />
+                <element signature="e#6888#7273#0" expanded="false" />
+                <element signature="e#7326#7442#0" expanded="false" />
+                <element signature="e#7488#7734#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -94,19 +98,19 @@
         <option value="$PROJECT_DIR$/main_state.py" />
         <option value="$PROJECT_DIR$/level_state.py" />
         <option value="$PROJECT_DIR$/help_state.py" />
+        <option value="$PROJECT_DIR$/tile_class.py" />
         <option value="$PROJECT_DIR$/camera_class.py" />
         <option value="$PROJECT_DIR$/global_parameters.py" />
-        <option value="$PROJECT_DIR$/game_state.py" />
-        <option value="$PROJECT_DIR$/tile_class.py" />
         <option value="$PROJECT_DIR$/object_class.py" />
+        <option value="$PROJECT_DIR$/game_state.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="137" />
-    <option name="y" value="14" />
+    <option name="x" value="61" />
+    <option name="y" value="19" />
     <option name="width" value="1565" />
-    <option name="height" value="995" />
+    <option name="height" value="1017" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -233,7 +237,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="137" y="14" width="1565" height="995" extended-state="1" />
+    <frame x="61" y="19" width="1565" height="1017" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18616678" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -241,7 +245,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32246798" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20204313" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -295,11 +299,15 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#4952#6129#0" expanded="false" />
-            <element signature="e#6150#6535#0" expanded="false" />
-            <element signature="e#6588#6704#0" expanded="false" />
-            <element signature="e#6750#6996#0" expanded="false" />
-            <element signature="e#7023#7297#0" expanded="false" />
+            <element signature="e#648#1066#0" expanded="false" />
+            <element signature="e#1084#1399#0" expanded="false" />
+            <element signature="e#1426#2683#0" expanded="false" />
+            <element signature="e#3116#4710#0" expanded="false" />
+            <element signature="e#4781#5669#0" expanded="false" />
+            <element signature="e#5690#6867#0" expanded="false" />
+            <element signature="e#6888#7273#0" expanded="false" />
+            <element signature="e#7326#7442#0" expanded="false" />
+            <element signature="e#7488#7734#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -402,11 +410,15 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#4952#6129#0" expanded="false" />
-            <element signature="e#6150#6535#0" expanded="false" />
-            <element signature="e#6588#6704#0" expanded="false" />
-            <element signature="e#6750#6996#0" expanded="false" />
-            <element signature="e#7023#7297#0" expanded="false" />
+            <element signature="e#648#1066#0" expanded="false" />
+            <element signature="e#1084#1399#0" expanded="false" />
+            <element signature="e#1426#2683#0" expanded="false" />
+            <element signature="e#3116#4710#0" expanded="false" />
+            <element signature="e#4781#5669#0" expanded="false" />
+            <element signature="e#5690#6867#0" expanded="false" />
+            <element signature="e#6888#7273#0" expanded="false" />
+            <element signature="e#7326#7442#0" expanded="false" />
+            <element signature="e#7488#7734#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -587,50 +599,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/camera_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="52" column="29" lean-forward="false" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+        <state relative-caret-position="648">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tile_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/global_parameters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="797">
-          <caret line="45" column="30" lean-forward="true" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="210" column="53" lean-forward="true" selection-start-line="210" selection-start-column="53" selection-end-line="210" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#4952#6129#0" expanded="false" />
-            <element signature="e#6150#6535#0" expanded="false" />
-            <element signature="e#6588#6704#0" expanded="false" />
-            <element signature="e#6750#6996#0" expanded="false" />
-            <element signature="e#7023#7297#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tile_class.py">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
-          <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/object_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="127" column="95" lean-forward="false" selection-start-line="127" selection-start-column="95" selection-end-line="127" selection-end-column="95" />
+        <state relative-caret-position="483">
+          <caret line="51" column="57" lean-forward="false" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <element signature="e#1625#2572#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="136" column="22" lean-forward="true" selection-start-line="136" selection-start-column="22" selection-end-line="136" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#648#1066#0" expanded="false" />
+            <element signature="e#1084#1399#0" expanded="false" />
+            <element signature="e#1426#2683#0" expanded="false" />
+            <element signature="e#3116#4710#0" expanded="false" />
+            <element signature="e#4781#5669#0" expanded="false" />
+            <element signature="e#5690#6867#0" expanded="false" />
+            <element signature="e#6888#7273#0" expanded="false" />
+            <element signature="e#7326#7442#0" expanded="false" />
+            <element signature="e#7488#7734#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -32,3 +32,10 @@ class tile:
                 and 0 <= self.m_y + global_parameters.tile_size_y/2 \
                 and self.m_y - global_parameters.tile_size_y/2 <= global_parameters.height:
             return True
+
+
+    def get_bb(self):
+        return self.m_x - global_parameters.tile_size_y/2\
+            , self.m_y - global_parameters.tile_size_y/2\
+            , self.m_x + global_parameters.tile_size_y/2\
+            , self.m_y + global_parameters.tile_size_y/2
