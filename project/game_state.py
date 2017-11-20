@@ -190,6 +190,11 @@ def update():
 
 
     player_get_attack_time(frame_time)
+
+
+    if player.return_hp() <= 0 or collect_lemon == goal_lemon:
+        game_framework.change_state(main_state)
+
     pass
 
 
