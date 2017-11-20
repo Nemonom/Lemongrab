@@ -36,7 +36,7 @@ player_att, player_hp, player_mp = 5, 100, 100
 mon_size_x, mon_size_y = 20, 80
 mon_hp, mon_att, mon_spd = 20, 5, 5
 
-item_size = 20
+item_size = 50
 
 hp_item, mp_item = 5, 5
 

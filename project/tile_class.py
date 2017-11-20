@@ -30,5 +30,5 @@ class tile:
         if 0 <= self.m_x + global_parameters.tile_size_y/2 \
                 and self.m_x - global_parameters.tile_size_y/2 <= global_parameters.width \
                 and 0 <= self.m_y + global_parameters.tile_size_y/2 \
-                and 0 <= self.m_y + global_parameters.tile_size_y/2 <= global_parameters.height:
+                and self.m_y - global_parameters.tile_size_y/2 <= global_parameters.height:
             return True

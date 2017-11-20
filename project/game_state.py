@@ -50,15 +50,13 @@ def enter():
     global bullets
     global items
 
+    UI_init()
     camera = camera_class.camera()
     test = tile_class.tile(1, 100, 100)
-    UI_init()
-
     main_pointer = mouse_pointer.pointer()
-
     player = object_class.player()
     bullets = []
-    items = []
+    items = [object_class.item(i, 100 * i, 200 * i) for i in range(4)]
 
 def exit():
     global main_pointer
@@ -103,13 +101,13 @@ def handle_events():
             camera.handle_event(event)
             #치트키
             if event.type == SDL_KEYDOWN:
-                if event.key == SDLK_F1:
+                if event.key == SDLK_1:
                     player.control_hp('-', 10)
-                elif event.key == SDLK_F2:
+                elif event.key == SDLK_2:
                     player.control_mp('-', 10)
-                elif event.key == SDLK_F3:
+                elif event.key == SDLK_3:
                     player.control_hp('+', 10)
-                elif event.key == SDLK_F4:
+                elif event.key == SDLK_4:
                     player.control_mp('+', 10)
 
 
@@ -120,10 +118,13 @@ def draw():
     global option_but
     global player
     global bullets
+    global items
 
     clear_canvas()
     hide_cursor()
     player.draw()
+    for item in items:
+        item.draw()
     for bullet in bullets:
         bullet.draw()
     test.draw()
@@ -137,15 +138,35 @@ def update():
     global camera
     global test
     global bullets
+    global items
+    global player
+    global collect_lemon
+    global collect_money
 
     frame_time = get_frame_time()
 
     camera.update(frame_time)
     test.update(camera.return_x(), camera.return_y())
+    for item in items:
+        item.camera_update(camera.return_x(), camera.return_y())
+        if item.if_camera(): # 카메라 안에 있는 아이템 충돌체크
+            if collision(player, item):
+                if item.return_type() == 0:
+                    collect_lemon += 1
+                elif item.return_type() == 1:
+                    player.control_hp('+', global_parameters.hp_item)
+                elif item.return_type() == 2:
+                    player.control_hp('+', global_parameters.mp_item)
+                elif item.return_type() == 3:
+                    collect_money += 100
+
+                items.remove(item)
 
     for bullet in bullets:
         bullet.camera_update(camera.return_x(), camera.return_y())
         bullet.update(frame_time)
+
+
 
     player_get_attack_time(frame_time)
     pass
@@ -157,7 +178,6 @@ def pause():
 
 def resume():
     pass
-
 
 
 def UI_init():
@@ -185,8 +205,7 @@ def UI_init():
     lemon_img = load_image('lemon.png')
     b_lemon_img = load_image('b_lemon.png')
     money_img = load_image('money.png')
-    if font == None:
-        font = load_font('Alice_in_Wonderland.ttf', 20)
+    font = load_font('Alice_in_Wonderland.ttf', 20)
 
     normal_state_img = load_image('normal_state.png')
     attack_state_img = load_image('attack_state.png')
@@ -252,9 +271,7 @@ def UI_exit():
 
 
 
-
 current_time = 0.0
-
 
 def get_frame_time():
 
@@ -275,4 +292,16 @@ def player_get_attack_time(frame_time):
             get_attack_time_cnt = 0
             player_get_attack = False
 
+    pass
+
+def collision(a, b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+
+    return True
     pass

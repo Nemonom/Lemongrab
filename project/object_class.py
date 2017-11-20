@@ -36,13 +36,10 @@ class player:
     def control_mp(self, what, num):
         if what == '-':
             self.mp -= num
-            self.mp = max(0, self.hp)
+            self.mp = max(0, self.mp)
         elif what == '+':
             self.mp += num
             self.mp = min(100, self.mp)
-
-    def increase_hp(self, num):
-        self.hp+=num
 
     def return_hp(self):
         return self.hp
@@ -85,16 +82,16 @@ class enemy:
 
 #item class
 class item:
-
+    img = None
     def __init__(self, what, x, y):
         self.type = what
         self.m_x, self.m_y = x, y
         if what == 0:
             self.img = load_image('lemon.png')
         elif what == 1:
-            self.img = load_image('hp.png')
+            self.img = load_image('hp_item.png')
         elif what == 2:
-            self.img = load_image('mp.png')
+            self.img = load_image('mp_item.png')
         elif what == 3:
             self.img = load_image('money.png')
 
@@ -114,11 +111,13 @@ class item:
             , self.m_x + global_parameters.item_size/2, self.m_y + global_parameters.item_size/2
 
     def if_camera(self):
-        if 0 <= self.m_x + global_parameters.item_size / 2 \
-                and self.m_x - global_parameters.item_size / 2 <= global_parameters.width \
-                and 0 <= self.m_y + global_parameters.item_size / 2 \
-                and 0 <= self.m_y + global_parameters.item_size / 2 <= global_parameters.height:
+        if 0 <= self.m_x + global_parameters.item_size \
+                and self.m_x - global_parameters.item_size <= global_parameters.width \
+                and 0 <= self.m_y + global_parameters.item_size \
+                and self.m_y - global_parameters.item_size <= global_parameters.height:
             return True
+        else:
+            print("asdf")
 
 #bullet class
 class bullet:
@@ -126,7 +125,7 @@ class bullet:
 
     def __init__(self, event_x, event_y):
         self.x, self.y = global_parameters.width/2, global_parameters.height/2
-        self.size_x, self.size_y = global_parameters.item_size, global_parameters.item_size
+        self.size_x, self.size_y = global_parameters.item_size/2, global_parameters.item_size/2
         self.angle = math.atan2((event_y - global_parameters.height/2) , ( event_x - global_parameters.width/2))
 
 
