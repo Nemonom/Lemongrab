@@ -151,16 +151,19 @@ def update():
     global collect_lemon
     global collect_money
 
-    player_collision = False
+    inter_w, inter_h = 0, 0
+    i_collision = False
+
     frame_time = get_frame_time()
     camera.update(frame_time)
 
-    new_x, new_y = 0, 0
 
     for tile in tiles:
         tile.update(camera.return_x(), camera.return_y())
         if tile.if_camera() and collision(player, tile):
-            new_x, new_y = wall_collision(player, tile, camera.return_x(), camera.return_y())
+            inter_w, inter_h = intersect_pos(tile, player)
+            i_collision = True
+            pass
 
     for item in items:
         item.camera_update(camera.return_x(), camera.return_y())
@@ -181,12 +184,14 @@ def update():
         bullet.update(frame_time)
         bullet.camera_update(camera.return_x(), camera.return_y())
 
-    for tile in tiles:
-        tile.update(new_x * camera.return_x(), new_y * camera.return_y())
-    for item in items:
-        item.camera_update(new_x * camera.return_x(), new_y * camera.return_y())
-    for bullet in bullets:
-        bullet.camera_update(new_x * camera.return_x(), new_y * camera.return_y())
+    if i_collision:
+        for tile in tiles:
+            tile.update(inter_w, inter_h)
+        for item in items:
+            item.camera_update(inter_w, inter_h)
+        for bullet in bullets:
+            bullet.camera_update(inter_w, inter_h)
+
 
 
     player_get_attack_time(frame_time)
@@ -332,37 +337,28 @@ def collision(a, b):
     return True
 
 
-def wall_collision(a, b, dir_x, dir_y):
+def intersect_pos(a, b):
 
     left_a, bottom_a, right_a, top_a = a.get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
-    if left_a > right_b: return False
-    if right_a < left_b: return False
-    if top_a < bottom_b: return False
-    if bottom_a > top_b: return False
 
-    stop_x = 0
-    stop_y = 0
+    intersect_top = min(top_a, top_b)
+    intersect_bottom = max(bottom_a, bottom_b)
+    intersect_right = min(right_a, right_b)
+    intersect_left = max(left_a, left_b)
 
-    inter_w, inter_h = 0, 0
+    inter_w = intersect_right - intersect_left
+    inter_h = intersect_top - intersect_bottom
 
-    if dir_x < 0 and left_b < right_a:
-        inter_w = right_a - left_b
-    elif dir_x > 0 and left_a < right_b:
-        inter_w = right_b - left_a
-    if dir_y < 0 and bottom_b < top_a:
-        inter_h = top_a - bottom_b
-    elif dir_y > 0 and bottom_a < top_b:
-        inter_h = top_b - bottom_a
+    if inter_w > inter_h:
+        if top_b>top_a:
+           return 0, -inter_h
+        else:
+            return 0, inter_h
+    else:
+        if right_b > right_a:
+            return -inter_w, 0
+        else:
+            return inter_w, 0
 
-
-    if dir_x < 0 and left_b < right_a:
-        stop_x = -1
-    elif dir_x > 0 and left_a < right_b:
-        stop_x = -1
-    if dir_y < 0 and bottom_b < top_a:
-        stop_y = -1
-    elif dir_y > 0 and bottom_a < top_b:
-        stop_y = -1
-
-    return stop_x, stop_y
+    pass
