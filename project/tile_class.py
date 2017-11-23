@@ -13,12 +13,12 @@ class tile:
             tile.wall_img = load_image('lemon.png')
 
     def draw(self):
-        if self.if_camera():
+        if self.in_camera_range():
             if self.state == 1:
                 tile.wall_img.draw(self.m_x, self.m_y
                               , tile.size_x, tile.size_y)
-                draw_rectangle(self.m_x - global_parameters.tile_size_x/2, self.m_y - global_parameters.tile_size_y/2
-                               , self.m_x + global_parameters.tile_size_x/2, self.m_y + global_parameters.tile_size_y/2)
+                draw_rectangle(self.m_x - tile.size_x/2, self.m_y - tile.size_y/2
+                               , self.m_x + tile.size_x/2, self.m_y + tile.size_y/2)
         pass
 
     def update(self, camera_x, camera_y):
@@ -26,16 +26,16 @@ class tile:
         self.m_y += camera_y
         pass
 
-    def if_camera(self):
-        if 0 <= self.m_x + global_parameters.tile_size_y/2 \
-                and self.m_x - global_parameters.tile_size_y/2 <= global_parameters.width \
-                and 0 <= self.m_y + global_parameters.tile_size_y/2 \
-                and self.m_y - global_parameters.tile_size_y/2 <= global_parameters.height:
+    def in_camera_range(self):
+        if 0 <= self.m_x + tile.size_y/2 \
+                and self.m_x - tile.size_y/2 <= global_parameters.width \
+                and 0 <= self.m_y + tile.size_y/2 \
+                and self.m_y - tile.size_y/2 <= global_parameters.height:
             return True
 
 
     def get_bb(self):
-        return self.m_x - global_parameters.tile_size_y/2\
-            , self.m_y - global_parameters.tile_size_y/2\
-            , self.m_x + global_parameters.tile_size_y/2\
-            , self.m_y + global_parameters.tile_size_y/2
+        return self.m_x - tile.size_y/2\
+            , self.m_y - tile.size_y/2\
+            , self.m_x + tile.size_y/2\
+            , self.m_y + tile.size_y/2

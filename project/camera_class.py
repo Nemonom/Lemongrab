@@ -59,8 +59,3 @@ class camera:
         elif self.ver_state == self.STOP:
             camera.move_y = 0
     pass
-
-    def return_x(self):
-        return camera.move_x
-    def return_y(self):
-        return camera.move_y

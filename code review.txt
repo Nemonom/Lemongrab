@@ -1,0 +1,5 @@
+from button_class import Button as NewButton -> 클래스 이름 바뀜
+
+if 안에 길게 들어가 있으면 빼서 함수로
+
+refactor 변수이름을 바꾸면 전체를 바꿔줌

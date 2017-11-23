@@ -62,30 +62,47 @@ class enemy:
         if enemy.img == None:
             img = load_image('enemy.png')
         enemy.size_x, enemy.size_y = global_parameters.mon_size_x, global_parameters.mon_size_y
-        self.dir_x, self.dir_y = 0, 0
         self.m_x, self.m_y = x, y
         self.hp = global_parameters.mon_hp
         self.att = global_parameters.mon_att
         self.spd = global_parameters.MON_RUN_SPEED_PPS * (global_parameters.game_level+1)
+        self.state = enemy.RELAX
+        self.att_timer = 0
 
     def camera_update(self, camera_x, camera_y):
         self.m_x += camera_x
         self.m_y += camera_y
 
+    def update(self, frame_time, player_x, player_y):
+        if self.state == enemy.RELAX:
+            pass
+        elif self.state == enemy.CHASE:
+            pass
+        elif self.state == enemy.ATTACK:
+            pass
 
-    def if_camera(self):
+
+    def in_camera_range(self):
         if 0 <= self.m_x + enemy.size_x / 2 \
                 and self.m_x - enemy.size_x / 2 <= global_parameters.width \
                 and 0 <= self.m_y + enemy.size_y / 2 \
                 and 0 <= self.m_y + enemy.size_y / 2 <= global_parameters.height:
             return True
 
+    def draw(self):
+        if self.in_camera_range():
+            enemy.img.draw(self.m_x, self.m_y, enemy.size_x, enemy.size_x)
+
+
+
 #item class
 class item:
     img = None
+    size_x, size_y = None, None
     def __init__(self, what, x, y):
         self.type = what
         self.m_x, self.m_y = x, y
+        item.size_x, item.size_y = global_parameters.item_size, global_parameters.item_size
         if what == 0:
             self.img = load_image('lemon.png')
         elif what == 1:
@@ -99,33 +116,32 @@ class item:
         return self.type
 
     def draw(self):
-        if self.if_camera():
-            self.img.draw(self.m_x, self.m_y, global_parameters.item_size, global_parameters.item_size)
+        if self.in_camera_range():
+            self.img.draw(self.m_x, self.m_y, item.size_x, item.size_y)
 
     def camera_update(self, camera_x, camera_y):
         self.m_x += camera_x
         self.m_y += camera_y
 
     def get_bb(self):
-        return self.m_x - global_parameters.item_size/2, self.m_y - global_parameters.item_size/2\
-            , self.m_x + global_parameters.item_size/2, self.m_y + global_parameters.item_size/2
+        return self.m_x - item.size_x/2, self.m_y - item.size_x/2\
+            , self.m_x + item.size_x/2, self.m_y + item.size_x/2
 
-    def if_camera(self):
-        if 0 <= self.m_x + global_parameters.item_size \
-                and self.m_x - global_parameters.item_size <= global_parameters.width \
-                and 0 <= self.m_y + global_parameters.item_size \
-                and self.m_y - global_parameters.item_size <= global_parameters.height:
+    def in_camera_range(self):
+        if 0 <= self.m_x + item.size_x \
+                and self.m_x - item.size_x <= global_parameters.width \
+                and 0 <= self.m_y + item.size_x \
+                and self.m_y - item.size_x <= global_parameters.height:
             return True
 
 #bullet class
 class bullet:
     img = None
-
+    size_x, size_y = None, None
     def __init__(self, event_x, event_y):
         self.x, self.y = global_parameters.width/2, global_parameters.height/2
-        self.size_x, self.size_y = global_parameters.item_size/2, global_parameters.item_size/2
+        bullet.size_x, bullet.size_y = global_parameters.item_size/2, global_parameters.item_size/2
         self.angle = math.atan2((event_y - global_parameters.height/2) , ( event_x - global_parameters.width/2))
-
 
         if bullet.img == None:
            bullet.img = load_image('bullet.png')
@@ -140,7 +156,7 @@ class bullet:
         self.y += camera_y
 
     def draw(self):
-        self.img.rotate_draw(self.angle, self.x, self.y, self.size_x, self.size_y)
+        self.img.rotate_draw(self.angle, self.x, self.y, bullet.size_x, bullet.size_y)
 
     def get_bb(self):
-        return self.x - self.size_x/2, self.y - self.size_y/2, self.x + self.size_x/2, self.y + self.size_y/2
+        return self.x - bullet.size_x/2, self.y - bullet.size_y/2, self.x + bullet.size_x/2, self.y + bullet.size_y/2

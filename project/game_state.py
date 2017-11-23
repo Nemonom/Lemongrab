@@ -29,12 +29,13 @@ hp_bar_img = None
 mp_bar_img = None
 
 player = None
-player_get_attack = False
-get_attack_time_cnt = 0
+player_hurt = False
 
+#오브젝트 배열
 bullets = None
 items = None
 tiles = None
+enemys = None
 
 camera = None
 test = None
@@ -49,6 +50,7 @@ def enter():
     global bullets
     global items
     global tiles
+    global enemys
 
     UI_init()
     camera = camera_class.camera()
@@ -59,6 +61,7 @@ def enter():
     tiles = []
     test = tile_class.tile(1, 100, 100)
     tiles.append(test)
+    enemys = []
 
 def exit():
     global main_pointer
@@ -68,6 +71,7 @@ def exit():
     global bullets
     global items
     global collect_money
+    global enemys
 
     global_parameters.my_money += collect_money
     collect_money = 0
@@ -80,6 +84,7 @@ def exit():
     del player
     del bullets
     del items
+    del enemys
 
 def handle_events():
     global camera
@@ -101,8 +106,10 @@ def handle_events():
                     game_framework.change_state(main_state)
                 else:
                     if event.type == SDL_MOUSEBUTTONDOWN:
-                        bullet = object_class.bullet(event.x, 700 - event.y)
-                        bullets.append(bullet)
+                        if player.mp >= 2:
+                            bullet = object_class.bullet(event.x, 700 - event.y)
+                            bullets.append(bullet)
+                            player.mp -= 2
 
         else:
             camera.handle_event(event)
@@ -118,7 +125,6 @@ def handle_events():
                     player.control_mp('+', 10)
 
 
-
 def draw():
     global tiles
     global main_pointer
@@ -126,6 +132,7 @@ def draw():
     global player
     global bullets
     global items
+    global enemys
 
     clear_canvas()
     hide_cursor()
@@ -136,6 +143,9 @@ def draw():
         item.draw()
     for tile in tiles:
         tile.draw()
+    for enemy in enemys:
+        enemy.draw()
+
     UI_draw()
     option_but.draw()
     main_pointer.draw(1)
@@ -150,24 +160,27 @@ def update():
     global player
     global collect_lemon
     global collect_money
+    global enemys
+    global player_hurt
 
     inter_w, inter_h = 0, 0
     i_collision = False
+    player_hurt = False
 
     frame_time = get_frame_time()
     camera.update(frame_time)
 
 
     for tile in tiles:
-        tile.update(camera.return_x(), camera.return_y())
-        if tile.if_camera() and collision(player, tile):
+        tile.update(camera.move_x, camera.move_y)
+        if tile.in_camera_range() and collision(player, tile):
             inter_w, inter_h = intersect_pos(tile, player)
             i_collision = True
             pass
 
     for item in items:
-        item.camera_update(camera.return_x(), camera.return_y())
-        if item.if_camera(): # 카메라 안에 있는 아이템 충돌체크
+        item.camera_update(camera.move_x, camera.move_y)
+        if item.in_camera_range(): # 카메라 안에 있는 아이템 충돌체크
             if collision(player, item):
                 if item.return_type() == 0:
                     collect_lemon += 1
@@ -180,9 +193,28 @@ def update():
 
                 items.remove(item)
 
+    for enemy in enemys:
+        if enemy.in_camera_range():
+            enemy.state = enemy.CHASE
+            if collision(enemy, player):
+                enemy.state = enemy.ATTACK
+                player_hurt = True
+        else:
+            enemy.state = enemy.RELAX
+        enemy.update(frame_time)
+        enemy.camera_update(camera.move_x, camera.move_y)
+
     for bullet in bullets:
         bullet.update(frame_time)
-        bullet.camera_update(camera.return_x(), camera.return_y())
+        bullet.camera_update(camera.move_x, camera.move_y)
+        for tile in tiles:
+            if collision(bullet, tile):
+                bullets.remove(bullet)
+        for enemy in enemys:
+            if collision(bullet, enemy):
+                enemy.hp -= 5
+
+
 
     if i_collision:
         for tile in tiles:
@@ -191,11 +223,8 @@ def update():
             item.camera_update(inter_w, inter_h)
         for bullet in bullets:
             bullet.camera_update(inter_w, inter_h)
-
-
-
-    player_get_attack_time(frame_time)
-
+        for enemy in enemys:
+            enemy.camera_update(inter_w, inter_h)
 
     if player.return_hp() <= 0 or collect_lemon == goal_lemon:
         game_framework.change_state(main_state)
@@ -264,7 +293,7 @@ def UI_draw():
             b_lemon_img.draw(25 + (i * 40), 25
                             , global_parameters.ect_size_x, global_parameters.ect_size_x)
 
-    if player_get_attack:
+    if player_hurt:
         attack_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
     else:
         normal_state_img.draw(45, 650, global_parameters.icon_size_x, global_parameters.icon_size_y)
@@ -312,19 +341,6 @@ def get_frame_time():
     current_time += frame_time
     return frame_time
 
-def player_get_attack_time(frame_time):
-    global get_attack_time_cnt
-    global player_get_attack
-
-    if player_get_attack:
-        get_attack_time_cnt += frame_time
-
-        if get_attack_time_cnt >= 1:
-            get_attack_time_cnt = 0
-            player_get_attack = False
-
-    pass
-
 def collision(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
@@ -335,7 +351,6 @@ def collision(a, b):
     if bottom_a > top_b: return False
 
     return True
-
 
 def intersect_pos(a, b):
 
