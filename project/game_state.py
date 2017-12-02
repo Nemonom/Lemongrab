@@ -10,6 +10,7 @@ import tile_class
 import object_class
 
 name = "game_state"
+real_back = None
 option_but = None
 width = global_parameters.width
 height = global_parameters.height
@@ -43,6 +44,7 @@ test = None
 
 
 def enter():
+    global real_back
     global main_pointer
     global test
     global camera
@@ -52,6 +54,7 @@ def enter():
     global tiles
     global enemys
 
+    real_back = load_image('game_back.png')
     UI_init()
     camera = camera_class.camera()
     main_pointer = mouse_pointer.pointer()
@@ -64,6 +67,7 @@ def enter():
     enemys = []
 
 def exit():
+    global real_back
     global main_pointer
     global tiles
     global camera
@@ -78,6 +82,7 @@ def exit():
 
     UI_exit()
 
+    del real_back
     del main_pointer
     del tiles
     del camera
@@ -126,6 +131,7 @@ def handle_events():
 
 
 def draw():
+    global real_back
     global tiles
     global main_pointer
     global option_but
@@ -136,6 +142,7 @@ def draw():
 
     clear_canvas()
     hide_cursor()
+    real_back.draw(500, 350, 1000, 700)
     player.draw()
     for bullet in bullets:
         bullet.draw()
@@ -274,6 +281,7 @@ def UI_init():
     pass
 
 def UI_draw():
+
     global goal_lemon
     global lemon_img
     global b_lemon_img
