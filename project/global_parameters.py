@@ -21,12 +21,12 @@ mouse_pointer_size = 30
 game_level = 0
 
 #shop
-shop_def_level, shop_att_level, shop_item_level = 1, 1, 1
-my_money = 0
+shop_att_level, shop_potion_level = 1, 1
+my_money = 10000
 
 
 #tile
-tile_size_x, tile_size_y = 100, 100
+tile_size_x, tile_size_y = 64,64
 
 #object
 player_size_x, player_size_y = 80, 80

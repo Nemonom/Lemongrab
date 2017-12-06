@@ -74,9 +74,12 @@ class enemy:
         self.m_y += camera_y
 
     def update(self, frame_time, player_x, player_y):
+        self.angle = math.atan2((self.m_y - global_parameters.height / 2), (self.m_x - global_parameters.width / 2))
         if self.state == enemy.RELAX:
             pass
         elif self.state == enemy.CHASE:
+            self.m_x += math.cos(self.angle) * frame_time * global_parameters.MON_RUN_SPEED_PPS
+            self.m_y += math.sin(self.angle) * frame_time * global_parameters.MON_RUN_SPEED_PPS
             pass
         elif self.state == enemy.ATTACK:
             pass
