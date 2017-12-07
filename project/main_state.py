@@ -88,7 +88,7 @@ def draw():
 
 
 
-def update():
+def update(frame_time):
     pass
 
 

@@ -30,7 +30,7 @@ def exit():
     del(logo_back)
     close_canvas()
 
-def update():
+def update(frame_time):
     global logo_time
 
     if(logo_time > 2.0):

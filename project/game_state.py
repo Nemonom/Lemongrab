@@ -8,6 +8,8 @@ import main_state
 import mouse_pointer
 import tile_class
 import object_class
+from tileset import TileSet as wholetile
+from tileset import TileMap as tilemap
 
 name = "game_state"
 real_back = None
@@ -41,7 +43,11 @@ enemys = None
 camera = None
 test = None
 
-
+def load_tile_set(file_name):
+    tile_set = wholetile()
+    tile_set.load(file_name)
+    return tile_set
+    pass
 
 def enter():
     global real_back
@@ -62,8 +68,20 @@ def enter():
     bullets = []
     items = [object_class.item(i, 100 * i, 200 * i) for i in range(4)]
     tiles = []
-    test = tile_class.tile(1, 100, 100)
-    tiles.append(test)
+
+
+    jsontile = load_tile_set('desert_tileset.json')
+    mapdata = tilemap()
+    mapdata.load('map.json')
+
+    for i in range(jsontile.tilecount):
+        col = i % jsontile.columns
+        row = i // jsontile.columns
+        #row = 10 - row - 1
+        put_tile = tile_class.tile(mapdata.data[i-1]
+                                   , col * jsontile.tilewidth, row * jsontile.tileheight, jsontile.tile_images[i])
+        tiles.append(put_tile)
+
     enemys = []
 
 def exit():
@@ -138,18 +156,20 @@ def draw():
     global player
     global bullets
     global items
-    global enemys
+    global enemys#
+    global jsontile
 
     clear_canvas()
     hide_cursor()
     real_back.draw(500, 350, 1000, 700)
+    for tile in tiles:
+        tile.draw()
     player.draw()
     for bullet in bullets:
         bullet.draw()
     for item in items:
         item.draw()
-    for tile in tiles:
-        tile.draw()
+
     for enemy in enemys:
         enemy.draw()
 
@@ -159,7 +179,7 @@ def draw():
     update_canvas()
     pass
 
-def update():
+def update(frame_time):
     global camera
     global tiles
     global bullets
@@ -174,13 +194,13 @@ def update():
     i_collision = False
     player_hurt = False
 
-    frame_time = get_frame_time()
     camera.update(frame_time)
 
 
     for tile in tiles:
         tile.update(camera.move_x, camera.move_y)
-        if tile.in_camera_range() and collision(player, tile):
+        if tile.in_camera_range() and collision(player, tile) and tile.state != 63:
+            print(tile.state)
             inter_w, inter_h = intersect_pos(tile, player)
             i_collision = True
             pass
@@ -192,9 +212,9 @@ def update():
                 if item.return_type() == 0:
                     collect_lemon += 1
                 elif item.return_type() == 1:
-                    player.control_hp('+', global_parameters.hp_item)
+                    player.control_hp('+', global_parameters.hp_item*global_parameters.shop_potion_level)
                 elif item.return_type() == 2:
-                    player.control_mp('+', global_parameters.mp_item)
+                    player.control_mp('+', global_parameters.mp_item*global_parameters.shop_potion_level)
                 elif item.return_type() == 3:
                     collect_money += 100
 
@@ -214,14 +234,12 @@ def update():
     for bullet in bullets:
         bullet.update(frame_time)
         bullet.camera_update(camera.move_x, camera.move_y)
-        for tile in tiles:
-            if collision(bullet, tile):
-                bullets.remove(bullet)
+        #for tile in tiles:
+        #    if collision(bullet, tile):
+        #        bullets.remove(bullet)
         for enemy in enemys:
             if collision(bullet, enemy):
                 enemy.hp -= 5
-
-
 
     if i_collision:
         for tile in tiles:
@@ -337,17 +355,6 @@ def UI_exit():
 
 
 
-
-
-current_time = 0.0
-
-def get_frame_time():
-
-    global current_time
-
-    frame_time = get_time() - current_time
-    current_time += frame_time
-    return frame_time
 
 def collision(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()

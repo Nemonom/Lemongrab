@@ -97,7 +97,9 @@ def draw():
     background.draw(width/2, height/2)
     shop_exit_but.draw()
 
-    font.draw(850, 650, '%d' % global_parameters.my_money, (50, 50, 50))
+    font.draw(850, 550, '%d' % global_parameters.my_money, (50, 50, 50))
+    font.draw(att_but.m_x, att_but.m_y - 100, '%d' % global_parameters.shop_att_level, (50, 50, 50))
+
     att_but.draw()
     potion_but.draw()
 
@@ -107,9 +109,7 @@ def draw():
 
 
 
-
-
-def update():
+def update(frame_time):
     pass
 
 

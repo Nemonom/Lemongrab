@@ -1,0 +1,11 @@
+{
+ "type": "tileset",
+ "name": "desert",
+ "image": "map.png",
+ "imageheight": 5120,
+ "imagewidth": 6400,
+ "tileheight": 64,
+ "tilewidth": 64,
+ "columns": 80,
+ "tilecount":8000
+}
