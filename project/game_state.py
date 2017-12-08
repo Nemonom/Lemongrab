@@ -43,6 +43,8 @@ enemys = None
 camera = None
 test = None
 
+map_img = None
+
 def load_tile_set(file_name):
     tile_set = wholetile()
     tile_set.load(file_name)
@@ -59,6 +61,7 @@ def enter():
     global items
     global tiles
     global enemys
+    global map_img
 
     real_back = load_image('game_back.png')
     UI_init()
@@ -77,12 +80,17 @@ def enter():
     for i in range(jsontile.tilecount):
         col = i % jsontile.columns
         row = i // jsontile.columns
-        #row = 10 - row - 1
-        put_tile = tile_class.tile(mapdata.data[i-1]
-                                   , col * jsontile.tilewidth, row * jsontile.tileheight, jsontile.tile_images[i])
+        row = 100 - row - 1
+        put_tile = tile_class.tile(mapdata.data[i]
+                                   , col * jsontile.tilewidth + jsontile.tilewidth/2
+                                   , row * jsontile.tileheight + jsontile.tileheight/2)
+        print(col)
+        print(row)
         tiles.append(put_tile)
 
     enemys = []
+
+    map_img = tile_class.back()
 
 def exit():
     global real_back
@@ -94,12 +102,14 @@ def exit():
     global items
     global collect_money
     global enemys
+    global map_img
 
     global_parameters.my_money += collect_money
     collect_money = 0
 
     UI_exit()
 
+    del map_img
     del real_back
     del main_pointer
     del tiles
@@ -156,12 +166,15 @@ def draw():
     global player
     global bullets
     global items
-    global enemys#
+    global enemys
     global jsontile
+    global map_img
 
     clear_canvas()
     hide_cursor()
     real_back.draw(500, 350, 1000, 700)
+    map_img.draw()
+
     for tile in tiles:
         tile.draw()
     player.draw()
@@ -189,6 +202,7 @@ def update(frame_time):
     global collect_money
     global enemys
     global player_hurt
+    global map_img
 
     inter_w, inter_h = 0, 0
     i_collision = False
@@ -241,7 +255,10 @@ def update(frame_time):
             if collision(bullet, enemy):
                 enemy.hp -= 5
 
+    map_img.update(camera.move_x, camera.move_y)
+
     if i_collision:
+        map_img.update(inter_w, inter_h)
         for tile in tiles:
             tile.update(inter_w, inter_h)
         for item in items:

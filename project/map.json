@@ -41,11 +41,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"tile.tsx"
+         "source":"..\/tile.tsx"
         }, 
         {
          "firstgid":1768,
-         "source":"tile.tsx"
+         "source":"..\/tile.tsx"
         }],
  "tilewidth":16,
  "type":"map",

@@ -14,15 +14,10 @@ class TileSet:
         data = json.load(f)
         f.close()
         self.__dict__.update(data)
-        self.base_image = load_image(self.image)
-        self.tile_images = []
+
         for i in range(self.tilecount):
             col, row = i % self.columns, i // self.columns
             left = col * self.tilewidth
-            bottom = self.base_image.h - (row + 1) * self.tileheight
-            image = self.base_image.clip_image(left, bottom,
-                                               self.tilewidth, self.tileheight)
-            self.tile_images.append(image)
 
         pass
 

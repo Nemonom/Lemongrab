@@ -1,22 +1,39 @@
 import global_parameters
 from pico2d import *
 
+class back:
+    img = None
+    def __init__(self):
+        self.m_x = 2560
+        self.m_y = 3200
+        if back.img == None:
+            back.img = load_image('map.png')
+
+    def draw(self):
+        back.img.draw(self.m_x, self.m_y)
+        pass
+
+    def update(self, camera_x, camera_y):
+        self.m_x += camera_x
+        self.m_y += camera_y
+        print(self.m_x)
+        print(self.m_y)
+        pass
+
+
+
 class tile:
     size_x, size_y = global_parameters.tile_size_x, global_parameters.tile_size_y
 
-    def __init__(self, state, x_local, y_local, image):
+    def __init__(self, state, x_local, y_local):
         self.state = state
         self.m_x = x_local
         self.m_y = y_local
-        self.img = image
 
 
     def draw(self):
         if self.in_camera_range():
-            self.img.draw(self.m_x, self.m_y
-                              , tile.size_x, tile.size_y)
-            draw_rectangle(self.m_x - tile.size_x, self.m_y - tile.size_y
-                           , self.m_x + tile.size_x, self.m_x + tile.size_x)
+            draw_rectangle(*self.get_bb())
         pass
 
     def update(self, camera_x, camera_y):
@@ -33,7 +50,7 @@ class tile:
 
 
     def get_bb(self):
-        return self.m_x - tile.size_y/2\
-            , self.m_y - tile.size_y/2\
-            , self.m_x + tile.size_y/2\
-            , self.m_y + tile.size_y/2
+        return self.m_x - tile.size_y\
+            , self.m_y - tile.size_y\
+            , self.m_x + tile.size_y\
+            , self.m_y + tile.size_y
