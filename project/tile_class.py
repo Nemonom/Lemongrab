@@ -50,7 +50,7 @@ class tile:
 
 
     def get_bb(self):
-        return self.m_x - tile.size_y\
-            , self.m_y - tile.size_y\
+        return self.m_x - tile.size_x\
+            , self.m_y - tile.size_x\
             , self.m_x + tile.size_y\
             , self.m_y + tile.size_y
