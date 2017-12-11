@@ -1,4 +1,5 @@
 from pico2d import *
+import random
 
 import button_class
 import camera_class
@@ -69,10 +70,8 @@ def enter():
     main_pointer = mouse_pointer.pointer()
     player = object_class.player()
     bullets = []
-    items = [object_class.item(i, 100 * i, 200 * i) for i in range(4)]
+
     tiles = []
-
-
     jsontile = load_tile_set('desert_tileset.json')
     mapdata = tilemap()
     mapdata.load('map.json')
@@ -84,13 +83,47 @@ def enter():
         put_tile = tile_class.tile(mapdata.data[i]
                                    , col * jsontile.tilewidth + jsontile.tilewidth/2
                                    , row * jsontile.tileheight + jsontile.tileheight/2)
-        print(col)
-        print(row)
+
         tiles.append(put_tile)
 
     enemys = []
 
+    items = []
+
+    item_cnt = 0
+    while item_cnt < goal_lemon:
+       put_ok = 0
+
+       lemon = object_class.item(0, random.randint(20, 5100), random.randint(20, 6370))
+       for tile in tiles:
+           if collision(lemon, tile) and tile.state != 63:
+               put_ok = 5
+
+       if put_ok != 5:
+           items.append(lemon)
+           item_cnt += 1
+           print(lemon.m_x, lemon.m_y)
+
+    item_cnt = 0
+    while item_cnt < (global_parameters.game_level + 1) * 10:
+        put_ok = 0
+
+        potion_h = object_class.item(1, random.randint(20, 5100), random.randint(20, 6370))
+        for tile in tiles:
+            if collision(potion_h, tile) and tile.state != 63:
+                put_ok = 5
+
+        if put_ok != 5:
+            items.append(potion_h)
+            item_cnt += 1
+            print(potion_h.m_x, potion_h.m_y)
+
+
+
+
     map_img = tile_class.back()
+
+
 
 def exit():
     global real_back
@@ -214,7 +247,6 @@ def update(frame_time):
     for tile in tiles:
         tile.update(camera.move_x, camera.move_y)
         if tile.in_camera_range() and collision(player, tile) and tile.state != 63:
-            print(tile.state)
             inter_w, inter_h = intersect_pos(tile, player)
             i_collision = True
             pass

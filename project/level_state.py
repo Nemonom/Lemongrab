@@ -31,7 +31,7 @@ def enter():
     level_exit_but = button_class.button('back_arrow.png', 50, 650, 30, 30)
     easy_but = button_class.button('easy_button.png', 250, 350, 200, 100)
     hard_but = button_class.button('hard_button.png', 750, 350, 200, 100)
-    shop_but = button_class.button('shop_button.png', 500, 650, 50, 50)
+    shop_but = button_class.button('shop_button.png', 500, 650, 100, 50)
     pass
 
 def exit():

@@ -16,8 +16,6 @@ class back:
     def update(self, camera_x, camera_y):
         self.m_x += camera_x
         self.m_y += camera_y
-        print(self.m_x)
-        print(self.m_y)
         pass
 
 
@@ -50,7 +48,7 @@ class tile:
 
 
     def get_bb(self):
-        return self.m_x - tile.size_x\
-            , self.m_y - tile.size_x\
-            , self.m_x + tile.size_y\
-            , self.m_y + tile.size_y
+        return self.m_x - tile.size_x/2\
+            , self.m_y - tile.size_x/2\
+            , self.m_x + tile.size_y/2\
+            , self.m_y + tile.size_y/2

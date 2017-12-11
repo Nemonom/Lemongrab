@@ -32,8 +32,8 @@ def enter():
 
     font = load_font('Alice_in_Wonderland.ttf', 30)
 
-    att_but = button_class.button('easy_button.png', 250, 350, 200, 100)
-    potion_but = button_class.button('hard_button.png', 750, 350, 200, 100)
+    att_but = button_class.button('shop_att.png', 250, 350, 150, 150)
+    potion_but = button_class.button('shop_potion.png', 750, 350, 150, 150)
     pass
 
 def exit():
@@ -98,7 +98,8 @@ def draw():
     shop_exit_but.draw()
 
     font.draw(850, 550, '%d' % global_parameters.my_money, (50, 50, 50))
-    font.draw(att_but.m_x, att_but.m_y - 100, '%d' % global_parameters.shop_att_level, (50, 50, 50))
+    font.draw(att_but.m_x, att_but.m_y - 180, '%d' % global_parameters.shop_att_level, (50, 50, 50))
+    font.draw(potion_but.m_x, potion_but.m_y - 180, '%d' % global_parameters.shop_potion_level, (50, 50, 50))
 
     att_but.draw()
     potion_but.draw()
