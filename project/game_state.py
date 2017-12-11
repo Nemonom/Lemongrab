@@ -46,6 +46,12 @@ test = None
 
 map_img = None
 
+clear_img = None
+game_clear = False
+
+logo_time = 0
+
+
 def load_tile_set(file_name):
     tile_set = wholetile()
     tile_set.load(file_name)
@@ -63,6 +69,9 @@ def enter():
     global tiles
     global enemys
     global map_img
+    global clear_img
+
+    clear_img = load_image('clear.png')
 
     real_back = load_image('game_back.png')
     UI_init()
@@ -94,7 +103,7 @@ def enter():
     while item_cnt < goal_lemon:
        put_ok = 0
 
-       lemon = object_class.item(0, random.randint(20, 5100), random.randint(20, 6370))
+       lemon = object_class.item(0, random.randint(20, 510), random.randint(20, 637))
        for tile in tiles:
            if collision(lemon, tile) and tile.state != 63:
                put_ok = 5
@@ -145,12 +154,14 @@ def exit():
     global collect_money
     global enemys
     global map_img
+    global clear_img
 
     global_parameters.my_money += collect_money
     collect_money = 0
 
     UI_exit()
 
+    del clear_img
     del map_img
     del real_back
     del main_pointer
@@ -211,26 +222,28 @@ def draw():
     global enemys
     global jsontile
     global map_img
+    global game_clear
 
     clear_canvas()
     hide_cursor()
     real_back.draw(500, 350, 1000, 700)
     map_img.draw()
 
-    for tile in tiles:
-        tile.draw()
     player.draw()
     for bullet in bullets:
         bullet.draw()
     for item in items:
         item.draw()
-
     for enemy in enemys:
         enemy.draw()
 
     UI_draw()
     option_but.draw()
     main_pointer.draw(1)
+
+    if game_clear:
+        clear_img.draw(500, 350, 1000, 700)
+
     update_canvas()
     pass
 
@@ -245,88 +258,105 @@ def update(frame_time):
     global enemys
     global player_hurt
     global map_img
+    global clear_img
+    global game_clear
 
-    inter_w, inter_h = 0, 0
-    i_collision = False
-    player_hurt = False
+    if game_clear:
+        global logo_time
+        if (logo_time > 3):
+            logo_time = 0
+            game_framework.change_state((main_state))
+        delay(0.01)
+        logo_time += 0.01
 
-    camera.update(frame_time)
+
+    else:
+        inter_w, inter_h = 0, 0
+        i_collision = False
+        player_hurt = False
+
+        camera.update(frame_time)
 
 
-    for tile in tiles:
-        tile.update(camera.move_x, camera.move_y)
-        if tile.in_camera_range() and collision(player, tile) and tile.state != 63:
-            inter_w, inter_h = intersect_pos(tile, player)
-            i_collision = True
-            pass
+        for tile in tiles:
+            tile.update(camera.move_x, camera.move_y)
+            if tile.in_camera_range() and collision(player, tile) and tile.state != 63:
+                inter_w, inter_h = intersect_pos(tile, player)
+                i_collision = True
+                pass
 
-    for item in items:
-        item.camera_update(camera.move_x, camera.move_y)
-        if item.in_camera_range(): # 카메라 안에 있는 아이템 충돌체크
-            if collision(player, item):
-                if item.return_type() == 0:
-                    collect_lemon += 1
-                elif item.return_type() == 1:
-                    player.control_hp('+', global_parameters.hp_item+global_parameters.shop_potion_level*2)
-                elif item.return_type() == 2:
-                    player.control_mp('+', global_parameters.mp_item+global_parameters.shop_potion_level*2)
-                elif item.return_type() == 3:
-                    collect_money += 100
+        for item in items:
+            item.camera_update(camera.move_x, camera.move_y)
+            if item.in_camera_range(): # 카메라 안에 있는 아이템 충돌체크
+                if collision(player, item):
+                    if item.return_type() == 0:
+                        collect_lemon += 1
+                    elif item.return_type() == 1:
+                        player.control_hp('+', global_parameters.hp_item+global_parameters.shop_potion_level*2)
+                    elif item.return_type() == 2:
+                        player.control_mp('+', global_parameters.mp_item+global_parameters.shop_potion_level*2)
+                    elif item.return_type() == 3:
+                        collect_money += 100
 
-                items.remove(item)
-
-    for enemy in enemys:
-        if enemy.in_camera_range():
-            enemy.state = enemy.CHASE
-            if collision(enemy, player):
-                enemy.state = enemy.ATTACK
-                player_hurt = True
-        else:
-            enemy.state = enemy.RELAX
-        enemy.update(frame_time)
-        enemy.camera_update(camera.move_x, camera.move_y)
-
-    for bullet in bullets:
-        bullet.update(frame_time)
-        bullet.camera_update(camera.move_x, camera.move_y)
+                    items.remove(item)
 
         for enemy in enemys:
             if enemy.in_camera_range():
-                if collision(bullet, enemy):
-                    enemy.hp -= 5
+                enemy.state = enemy.CHASE
+                if collision(enemy, player):
+                    enemy.state = enemy.ATTACK
+                    player_hurt = True
+            else:
+                enemy.state = enemy.RELAX
+            enemy.update(frame_time)
+            enemy.camera_update(camera.move_x, camera.move_y)
+
+        for bullet in bullets:
+            bullet.update(frame_time)
+            bullet.camera_update(camera.move_x, camera.move_y)
+
+            for enemy in enemys:
+                if enemy.in_camera_range():
+                    if collision(bullet, enemy):
+                        enemy.hp -= 5
+                        bullets.remove(bullet)
+                        break
+
+            #col = bullet.x / 64
+            #row = bullet.y / 64
+
+            #if tiles[int(80 * row + col)].state != 63:
+            #    bullets.remove(bullet)
+
+            for tile in tiles:
+                if tile.in_camera_range() and collision(bullet, tile) and tile.state != 63:
                     bullets.remove(bullet)
                     break
 
-        #if tiles[?].state != 63 bullets.remove(bullet)
-        #for tile in tiles:
-        #    if tile.in_camera_range():
-        #        if collision(bullet, tile) and tile.state != 63:
-        #            bullets.remove(bullet)
-        #            break
-
-        if bullet.in_camera_range() == False:
-            bullets.remove(bullet)
+            if bullet.in_camera_range() == False:
+                bullets.remove(bullet)
 
 
+        map_img.update(camera.move_x, camera.move_y)
 
+        if i_collision:
+            map_img.update(inter_w, inter_h)
+            for tile in tiles:
+                tile.update(inter_w, inter_h)
+            for item in items:
+                item.camera_update(inter_w, inter_h)
+            for bullet in bullets:
+                bullet.camera_update(inter_w, inter_h)
+            for enemy in enemys:
+                enemy.camera_update(inter_w, inter_h)
 
+        if player.return_hp() <= 0:
+            pass
 
+        if collect_lemon == goal_lemon:
+            delay(0.05)
+            game_clear = True
 
-    map_img.update(camera.move_x, camera.move_y)
-
-    if i_collision:
-        map_img.update(inter_w, inter_h)
-        for tile in tiles:
-            tile.update(inter_w, inter_h)
-        for item in items:
-            item.camera_update(inter_w, inter_h)
-        for bullet in bullets:
-            bullet.camera_update(inter_w, inter_h)
-        for enemy in enemys:
-            enemy.camera_update(inter_w, inter_h)
-
-    if player.return_hp() <= 0 or collect_lemon == goal_lemon:
-        game_framework.change_state(main_state)
 
     pass
 
