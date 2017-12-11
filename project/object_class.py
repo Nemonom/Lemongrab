@@ -163,3 +163,10 @@ class bullet:
 
     def get_bb(self):
         return self.x - bullet.size_x/2, self.y - bullet.size_y/2, self.x + bullet.size_x/2, self.y + bullet.size_y/2
+
+    def in_camera_range(self):
+        if 0 <= self.x + bullet.size_x/2 \
+                and self.x - bullet.size_x/2 <= global_parameters.width \
+                and 0 <= self.y + bullet.size_y/2 \
+                and self.y - bullet.size_y/2 <= global_parameters.height:
+            return True

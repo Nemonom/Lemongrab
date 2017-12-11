@@ -102,7 +102,6 @@ def enter():
        if put_ok != 5:
            items.append(lemon)
            item_cnt += 1
-           print(lemon.m_x, lemon.m_y)
 
     item_cnt = 0
     while item_cnt < (global_parameters.game_level + 1) * 10:
@@ -116,9 +115,19 @@ def enter():
         if put_ok != 5:
             items.append(potion_h)
             item_cnt += 1
-            print(potion_h.m_x, potion_h.m_y)
 
+    item_cnt = 0
+    while item_cnt < (global_parameters.game_level + 1) * 10:
+        put_ok = 0
 
+        potion_m = object_class.item(2, random.randint(20, 5100), random.randint(20, 6370))
+        for tile in tiles:
+            if collision(potion_m, tile) and tile.state != 63:
+                put_ok = 5
+
+        if put_ok != 5:
+            items.append(potion_m)
+            item_cnt += 1
 
 
     map_img = tile_class.back()
@@ -258,9 +267,9 @@ def update(frame_time):
                 if item.return_type() == 0:
                     collect_lemon += 1
                 elif item.return_type() == 1:
-                    player.control_hp('+', global_parameters.hp_item*global_parameters.shop_potion_level)
+                    player.control_hp('+', global_parameters.hp_item+global_parameters.shop_potion_level*2)
                 elif item.return_type() == 2:
-                    player.control_mp('+', global_parameters.mp_item*global_parameters.shop_potion_level)
+                    player.control_mp('+', global_parameters.mp_item+global_parameters.shop_potion_level*2)
                 elif item.return_type() == 3:
                     collect_money += 100
 
@@ -280,12 +289,28 @@ def update(frame_time):
     for bullet in bullets:
         bullet.update(frame_time)
         bullet.camera_update(camera.move_x, camera.move_y)
-        #for tile in tiles:
-        #    if collision(bullet, tile):
-        #        bullets.remove(bullet)
+
         for enemy in enemys:
-            if collision(bullet, enemy):
-                enemy.hp -= 5
+            if enemy.in_camera_range():
+                if collision(bullet, enemy):
+                    enemy.hp -= 5
+                    bullets.remove(bullet)
+                    break
+
+        #if tiles[?].state != 63 bullets.remove(bullet)
+        #for tile in tiles:
+        #    if tile.in_camera_range():
+        #        if collision(bullet, tile) and tile.state != 63:
+        #            bullets.remove(bullet)
+        #            break
+
+        if bullet.in_camera_range() == False:
+            bullets.remove(bullet)
+
+
+
+
+
 
     map_img.update(camera.move_x, camera.move_y)
 
