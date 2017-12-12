@@ -60,7 +60,7 @@ class enemy:
 
     def __init__(self, x, y):
         if enemy.img == None:
-            img = load_image('enemy.png')
+            enemy.img = load_image('enemy.png')
         enemy.size_x, enemy.size_y = global_parameters.mon_size_x, global_parameters.mon_size_y
         self.m_x, self.m_y = x, y
         self.hp = global_parameters.mon_hp
@@ -96,6 +96,9 @@ class enemy:
         if self.in_camera_range():
             enemy.img.draw(self.m_x, self.m_y, enemy.size_x, enemy.size_x)
 
+    def get_bb(self):
+        return self.m_x - enemy.size_x / 2, self.m_y - enemy.size_x / 2 \
+            , self.m_x + enemy.size_x / 2, self.m_y + enemy.size_x / 2
 
 
 #item class
@@ -141,11 +144,11 @@ class item:
 class bullet:
     img = None
     size_x, size_y = None, None
+
     def __init__(self, event_x, event_y):
         self.x, self.y = global_parameters.width/2, global_parameters.height/2
         bullet.size_x, bullet.size_y = global_parameters.item_size/2, global_parameters.item_size/2
         self.angle = math.atan2((event_y - global_parameters.height/2) , ( event_x - global_parameters.width/2))
-
         if bullet.img == None:
            bullet.img = load_image('bullet.png')
 

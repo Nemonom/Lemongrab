@@ -1,3 +1,9 @@
+from pico2d import *
+import sound_class
+
+global_bgm = sound_class.my_bgm()
+global_snd = sound_class.my_snd()
+
 #timer
 PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 25.0
@@ -33,7 +39,7 @@ player_size_x, player_size_y = 80, 80
 player_att, player_hp, player_mp = 5, 100, 100
 
 
-mon_size_x, mon_size_y = 20, 80
+mon_size_x, mon_size_y = 80, 80
 mon_hp, mon_att, mon_spd = 20, 5, 5
 
 item_size = 50
@@ -44,3 +50,4 @@ hp_item, mp_item = 5, 5
 icon_size_x, icon_size_y = 100, 100
 
 ect_size_x, ect_size_y= 35, 35
+

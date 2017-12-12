@@ -17,12 +17,15 @@ help_but = None
 width = global_parameters.width
 height = global_parameters.height
 
+
 def enter():
     global background
     global main_pointer
     global exit_but
     global start_but
     global help_but
+
+    global_parameters.global_bgm.play_bgm('title')
 
     background = load_image('main.png')
     main_pointer = mouse_pointer.pointer()
@@ -64,12 +67,15 @@ def handle_events():
 
             if event.button == SDL_BUTTON_LEFT:
                 if start_but.get_mouse_on():
+                    global_parameters.global_snd.play_snd('button')
                     game_framework.change_state(level_state)
                     break
                 if help_but.get_mouse_on():
-                    game_framework.change_state(help_state)
+                    global_parameters.global_snd.play_snd('button')
+                    game_framework.push_state(help_state)
                     break
                 if exit_but.get_mouse_on():
+                    global_parameters.global_snd.play_snd('button')
                     game_framework.quit()
 
 
@@ -82,9 +88,6 @@ def draw():
     help_but.draw()
     main_pointer.draw(0)
     update_canvas()
-
-
-
 
 
 

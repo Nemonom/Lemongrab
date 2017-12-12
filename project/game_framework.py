@@ -13,6 +13,7 @@ class GameState:
 
 
 
+
 class TestGameState:
     def __init__(self, name):
         self.name = name
@@ -56,6 +57,7 @@ def push_state(state):
     global stack
     if (len(stack) > 0):
         stack[-1].pause()
+
     stack.append(state)
     state.enter()
 

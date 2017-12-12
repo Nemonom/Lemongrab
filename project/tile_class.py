@@ -4,7 +4,7 @@ from pico2d import *
 class back:
     img = None
     def __init__(self):
-        self.m_x = 2560
+        self.m_x = 2060
         self.m_y = 3200
         if back.img == None:
             back.img = load_image('map.png')

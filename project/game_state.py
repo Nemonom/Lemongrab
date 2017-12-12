@@ -56,8 +56,8 @@ b_bullet_time = False
 
 space_down = False
 
+game_bgm = None
 bullet_bgm = None
-
 
 def load_tile_set(file_name):
     tile_set = wholetile()
@@ -78,10 +78,11 @@ def enter():
     global map_img
     global clear_img
     global game_clear
-    global bullet_bgm
 
-    bullet_bgm = load_music('bullet sound.mp3')
-    bullet_bgm.set_volume(100)
+
+    global_parameters.global_bgm.stop_bgm('title')
+    global_parameters.global_bgm.play_bgm('game')
+
 
     game_clear = False
 
@@ -104,20 +105,34 @@ def enter():
         row = i // jsontile.columns
         row = 100 - row - 1
         put_tile = tile_class.tile(mapdata.data[i]
-                                   , col * jsontile.tilewidth + jsontile.tilewidth/2
+                                   , col * jsontile.tilewidth + jsontile.tilewidth/2 - 500
                                    , row * jsontile.tileheight + jsontile.tileheight/2)
 
         tiles.append(put_tile)
 
     enemys = []
 
+    item_cnt = 0
+    while item_cnt < (goal_lemon *2):
+        put_ok = 0
+        enemy = object_class.enemy(random.randint(20, 2000), random.randint(20, 2000))
+        for tile in tiles:
+            if collision(enemy, tile) and tile.state != 63:
+                put_ok = 5
+
+        if put_ok != 5:
+            enemys.append(enemy)
+            item_cnt += 1
+
+
+
     items = []
 
     item_cnt = 0
     while item_cnt < goal_lemon:
        put_ok = 0
-    #
-       lemon = object_class.item(0, random.randint(20, 1000), random.randint(20, 1000))
+       #5100 6370
+       lemon = object_class.item(0, random.randint(20, 2000), random.randint(20, 2000))
        for tile in tiles:
            if collision(lemon, tile) and tile.state != 63:
                put_ok = 5
@@ -169,14 +184,14 @@ def exit():
     global enemys
     global map_img
     global clear_img
-    global bullet_bgm
 
+    global_parameters.global_bgm.stop_bgm('game')
+    global_parameters.global_bgm.play_bgm('title')
     global_parameters.my_money += collect_money
     collect_money = 0
 
     UI_exit()
 
-    del bullet_bgm
     del clear_img
     del map_img
     del real_back
@@ -195,7 +210,7 @@ def handle_events():
     global b_bullet_time
     global space_down
     global player
-    global bullet_bgm
+
 
     events = get_events()
     for event in events:
@@ -216,7 +231,7 @@ def handle_events():
                             if player.mp >= 2:
                                 bullet = object_class.bullet(event.x, 700 - event.y)
                                 bullets.append(bullet)
-                                bullet_bgm.play()
+                                global_parameters.global_snd.play_snd('bullet')
                                 player.mp -= 2
                                 b_bullet_time = True
 
@@ -233,9 +248,8 @@ def handle_events():
                     player.control_hp('+', 10)
                 elif event.key == SDLK_4:
                     player.control_mp('+', 10)
-                elif event.key == SDLK_SPACE and player.mp > 0:
+                elif event.key == SDLK_SPACE:
                     space_down = True
-                    player.mp -= 1
             if event.type == SDL_KEYUP:
                 if event.key == SDLK_SPACE:
                     space_down = False
@@ -292,12 +306,18 @@ def update(frame_time):
     global game_clear
     global f_bullet_time
     global b_bullet_time
+    global space_down
 
     if b_bullet_time:
         f_bullet_time += frame_time
-        if f_bullet_time >= 0.5:
+        if f_bullet_time >= 0.3:
             b_bullet_time = False
             f_bullet_time = 0
+
+    if space_down:
+        player.mp -= 0.1
+        if player.mp < 0:
+            space_down = False
 
     if game_clear:
         global logo_time
@@ -327,6 +347,7 @@ def update(frame_time):
             item.camera_update(camera.move_x, camera.move_y)
             if item.in_camera_range(): # 카메라 안에 있는 아이템 충돌체크
                 if collision(player, item):
+                    global_parameters.global_snd.play_snd('eat')
                     if item.return_type() == 0:
                         collect_lemon += 1
                     elif item.return_type() == 1:
@@ -339,14 +360,14 @@ def update(frame_time):
                     items.remove(item)
 
         for enemy in enemys:
-            if enemy.in_camera_range():
-                enemy.state = enemy.CHASE
-                if collision(enemy, player):
-                    enemy.state = enemy.ATTACK
-                    player_hurt = True
-            else:
-                enemy.state = enemy.RELAX
-            enemy.update(frame_time)
+            #if enemy.in_camera_range():
+            #    enemy.state = enemy.CHASE
+            #    if collision(enemy, player):
+            #        enemy.state = enemy.ATTACK
+            #        player_hurt = True
+            #else:
+            #    enemy.state = enemy.RELAX
+            #enemy.update(frame_time, global_parameters.width/2, global_parameters.height/2)
             enemy.camera_update(camera.move_x, camera.move_y)
 
         for bullet in bullets:
@@ -356,7 +377,11 @@ def update(frame_time):
             for enemy in enemys:
                 if enemy.in_camera_range():
                     if collision(bullet, enemy):
-                        enemy.hp -= 5
+                        enemy.hp -= 5 + global_parameters.shop_att_level * 3
+                        if enemy.hp < 0:
+                            enemys.remove(enemy)
+                            item = object_class.item(3, enemy.m_x, enemy.m_y)
+                            items.append(item)
                         bullets.remove(bullet)
                         break
 
@@ -498,10 +523,10 @@ def collision(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
 
-    if left_a-5 > right_b: return False
-    if right_a < left_b-5: return False
-    if top_a < bottom_b-5: return False
-    if bottom_a-5 > top_b: return False
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
 
     return True
 

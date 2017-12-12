@@ -76,6 +76,7 @@ def handle_events():
                     break
                 if shop_but.get_mouse_on():
                     global_parameters.game_level = 0
+                    global_parameters.global_snd.play_snd('button')
                     game_framework.change_state(shop_state)
                     break
                 if hard_but.get_mouse_on():
@@ -83,6 +84,7 @@ def handle_events():
                     game_framework.change_state(game_state)
                     break
                 if level_exit_but.get_mouse_on():
+                    global_parameters.global_snd.play_snd('button')
                     game_framework.change_state(main_state)
 
 

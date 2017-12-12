@@ -81,13 +81,16 @@ def handle_events():
                         and global_parameters.my_money >= global_parameters.shop_att_level * 200:
                     global_parameters.my_money -= global_parameters.shop_att_level * 200
                     global_parameters.shop_att_level+=1
+                    global_parameters.global_snd.play_snd('button')
 
                 if potion_but.get_mouse_on() \
                         and global_parameters.my_money >= global_parameters.shop_potion_level * 200:
                     global_parameters.my_money -= global_parameters.shop_potion_level * 200
                     global_parameters.shop_potion_level += 1
+                    global_parameters.global_snd.play_snd('button')
 
                 if shop_exit_but.get_mouse_on():
+                    global_parameters.global_snd.play_snd('button')
                     game_framework.change_state(level_state)
 
 def draw():
@@ -115,7 +118,6 @@ def draw():
     main_pointer.draw(0)
     update_canvas()
     pass
-
 
 
 def update(frame_time):
