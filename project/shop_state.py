@@ -18,6 +18,7 @@ font = None
 att_but = None
 potion_but = None
 
+money = None
 
 def enter():
     global background
@@ -26,6 +27,9 @@ def enter():
     global font
     global att_but
     global potion_but
+    global money
+
+    money = load_image('money.png')
     background = load_image('level.png')
     main_pointer = mouse_pointer.pointer()
     shop_exit_but = button_class.button('back_arrow.png', 50, 650, 30, 30)
@@ -43,7 +47,9 @@ def exit():
     global font
     global att_but
     global potion_but
+    global money
 
+    del money
     del(background)
     del(main_pointer)
     del(shop_exit_but)
@@ -91,12 +97,14 @@ def draw():
     global font
     global att_but
     global potion_but
+    global money
 
     clear_canvas()
     hide_cursor()
     background.draw(width/2, height/2)
     shop_exit_but.draw()
 
+    money.draw(820, 550, 50, 50)
     font.draw(850, 550, '%d' % global_parameters.my_money, (50, 50, 50))
     font.draw(att_but.m_x, att_but.m_y - 180, '%d' % global_parameters.shop_att_level, (50, 50, 50))
     font.draw(potion_but.m_x, potion_but.m_y - 180, '%d' % global_parameters.shop_potion_level, (50, 50, 50))

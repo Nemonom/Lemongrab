@@ -1,4 +1,5 @@
 from pico2d import *
+import time
 
 class GameState:
     def __init__(self, state):
@@ -78,23 +79,18 @@ def quit():
     global running
     running = False
 
-current_time = 0
-
-def get_frame_time():
-    global current_time
-    frame_time = get_time() - current_time
-    current_time += frame_time
-    return frame_time
-
 def run(start_state):
     global running, stack
     running = True
     stack = [start_state]
     start_state.enter()
+    current_time = time.time()
 
     while (running):
+        frame_time = time.time() - current_time
+        current_time += frame_time
         stack[-1].handle_events()
-        stack[-1].update(get_frame_time())
+        stack[-1].update(frame_time)
         stack[-1].draw()
     # repeatedly delete the top of the stack
     while (len(stack) > 0):

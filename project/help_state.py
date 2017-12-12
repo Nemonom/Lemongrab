@@ -61,7 +61,7 @@ def draw():
     update_canvas()
 
 
-def update():
+def update(frame_time):
 
     pass
 

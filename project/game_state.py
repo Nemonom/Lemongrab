@@ -51,6 +51,8 @@ game_clear = False
 
 logo_time = 0
 
+f_bullet_time = 0
+b_bullet_time = False
 
 def load_tile_set(file_name):
     tile_set = wholetile()
@@ -70,6 +72,9 @@ def enter():
     global enemys
     global map_img
     global clear_img
+    global game_clear
+
+    game_clear = False
 
     clear_img = load_image('clear.png')
 
@@ -176,6 +181,7 @@ def handle_events():
     global camera
     global option_but
     global bullets
+    global b_bullet_time
 
     events = get_events()
     for event in events:
@@ -192,10 +198,13 @@ def handle_events():
                     game_framework.change_state(main_state)
                 else:
                     if event.type == SDL_MOUSEBUTTONDOWN:
-                        if player.mp >= 2:
-                            bullet = object_class.bullet(event.x, 700 - event.y)
-                            bullets.append(bullet)
-                            player.mp -= 2
+                        if b_bullet_time == False:
+                            if player.mp >= 2:
+                                bullet = object_class.bullet(event.x, 700 - event.y)
+                                bullets.append(bullet)
+                                player.mp -= 2
+                                b_bullet_time = True
+
 
         else:
             camera.handle_event(event)
@@ -260,6 +269,14 @@ def update(frame_time):
     global map_img
     global clear_img
     global game_clear
+    global f_bullet_time
+    global b_bullet_time
+
+    if b_bullet_time:
+        f_bullet_time += frame_time
+        if f_bullet_time >= 0.5:
+            b_bullet_time = False
+            f_bullet_time = 0
 
     if game_clear:
         global logo_time
@@ -322,11 +339,6 @@ def update(frame_time):
                         bullets.remove(bullet)
                         break
 
-            #col = bullet.x / 64
-            #row = bullet.y / 64
-
-            #if tiles[int(80 * row + col)].state != 63:
-            #    bullets.remove(bullet)
 
             for tile in tiles:
                 if tile.in_camera_range() and collision(bullet, tile) and tile.state != 63:
@@ -386,6 +398,7 @@ def UI_init():
     option_but = button_class.button('option_button.png', 970, 665, 25, 25)
 
     collect_lemon = 0
+
     if global_parameters.game_level == 0:
         goal_lemon = 3
     elif global_parameters.game_level == 1:
