@@ -150,8 +150,8 @@ class bullet:
            bullet.img = load_image('bullet.png')
 
     def update(self, frame_time):
-        self.x += math.cos(self.angle) * frame_time * global_parameters.RUN_SPEED_PPS * 2
-        self.y += math.sin(self.angle) * frame_time * global_parameters.RUN_SPEED_PPS * 2
+        self.x += math.cos(self.angle) * frame_time * global_parameters.RUN_SPEED_PPS * 4
+        self.y += math.sin(self.angle) * frame_time * global_parameters.RUN_SPEED_PPS * 4
         pass
 
     def camera_update(self, camera_x, camera_y):

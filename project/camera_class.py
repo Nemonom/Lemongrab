@@ -44,18 +44,35 @@ class camera:
     pass
 
 
-    def update(self, frame_time):
-        if self.hor_state == self.RIGHT:
-            camera.move_x = -frame_time * global_parameters.RUN_SPEED_PPS
-        elif self.hor_state == self.LEFT:
-            camera.move_x = +frame_time * global_parameters.RUN_SPEED_PPS
-        elif self.hor_state == self.STOP:
-            camera.move_x = 0
+    def update(self, frame_time, space_down):
+        if space_down:
+            if self.hor_state == self.RIGHT:
+                camera.move_x = -frame_time * global_parameters.RUN_SPEED_PPS * 1.4
+            elif self.hor_state == self.LEFT:
+                camera.move_x = +frame_time * global_parameters.RUN_SPEED_PPS* 1.4
+            elif self.hor_state == self.STOP:
+                camera.move_x = 0
 
-        if self.ver_state == self.UP:
-            camera.move_y = -frame_time * global_parameters.RUN_SPEED_PPS
-        elif self.ver_state == self.DOWN:
-            camera.move_y = +frame_time * global_parameters.RUN_SPEED_PPS
-        elif self.ver_state == self.STOP:
-            camera.move_y = 0
+            if self.ver_state == self.UP:
+                camera.move_y = -frame_time * global_parameters.RUN_SPEED_PPS* 1.4
+            elif self.ver_state == self.DOWN:
+                camera.move_y = +frame_time * global_parameters.RUN_SPEED_PPS* 1.4
+            elif self.ver_state == self.STOP:
+                camera.move_y = 0
+
+        else:
+            if self.hor_state == self.RIGHT:
+                camera.move_x = -frame_time * global_parameters.RUN_SPEED_PPS
+            elif self.hor_state == self.LEFT:
+                camera.move_x = +frame_time * global_parameters.RUN_SPEED_PPS
+            elif self.hor_state == self.STOP:
+                camera.move_x = 0
+
+            if self.ver_state == self.UP:
+                camera.move_y = -frame_time * global_parameters.RUN_SPEED_PPS
+            elif self.ver_state == self.DOWN:
+                camera.move_y = +frame_time * global_parameters.RUN_SPEED_PPS
+            elif self.ver_state == self.STOP:
+                camera.move_y = 0
+
     pass

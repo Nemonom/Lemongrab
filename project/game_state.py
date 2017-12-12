@@ -54,6 +54,11 @@ logo_time = 0
 f_bullet_time = 0
 b_bullet_time = False
 
+space_down = False
+
+bullet_bgm = None
+
+
 def load_tile_set(file_name):
     tile_set = wholetile()
     tile_set.load(file_name)
@@ -73,6 +78,10 @@ def enter():
     global map_img
     global clear_img
     global game_clear
+    global bullet_bgm
+
+    bullet_bgm = load_music('bullet sound.mp3')
+    bullet_bgm.set_volume(100)
 
     game_clear = False
 
@@ -107,8 +116,8 @@ def enter():
     item_cnt = 0
     while item_cnt < goal_lemon:
        put_ok = 0
-
-       lemon = object_class.item(0, random.randint(20, 510), random.randint(20, 637))
+    #
+       lemon = object_class.item(0, random.randint(20, 1000), random.randint(20, 1000))
        for tile in tiles:
            if collision(lemon, tile) and tile.state != 63:
                put_ok = 5
@@ -160,12 +169,14 @@ def exit():
     global enemys
     global map_img
     global clear_img
+    global bullet_bgm
 
     global_parameters.my_money += collect_money
     collect_money = 0
 
     UI_exit()
 
+    del bullet_bgm
     del clear_img
     del map_img
     del real_back
@@ -182,6 +193,9 @@ def handle_events():
     global option_but
     global bullets
     global b_bullet_time
+    global space_down
+    global player
+    global bullet_bgm
 
     events = get_events()
     for event in events:
@@ -202,6 +216,7 @@ def handle_events():
                             if player.mp >= 2:
                                 bullet = object_class.bullet(event.x, 700 - event.y)
                                 bullets.append(bullet)
+                                bullet_bgm.play()
                                 player.mp -= 2
                                 b_bullet_time = True
 
@@ -218,6 +233,12 @@ def handle_events():
                     player.control_hp('+', 10)
                 elif event.key == SDLK_4:
                     player.control_mp('+', 10)
+                elif event.key == SDLK_SPACE and player.mp > 0:
+                    space_down = True
+                    player.mp -= 1
+            if event.type == SDL_KEYUP:
+                if event.key == SDLK_SPACE:
+                    space_down = False
 
 
 def draw():
@@ -292,7 +313,7 @@ def update(frame_time):
         i_collision = False
         player_hurt = False
 
-        camera.update(frame_time)
+        camera.update(frame_time, space_down)
 
 
         for tile in tiles:
@@ -477,10 +498,10 @@ def collision(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
 
-    if left_a > right_b: return False
-    if right_a < left_b: return False
-    if top_a < bottom_b: return False
-    if bottom_a > top_b: return False
+    if left_a-5 > right_b: return False
+    if right_a < left_b-5: return False
+    if top_a < bottom_b-5: return False
+    if bottom_a-5 > top_b: return False
 
     return True
 
