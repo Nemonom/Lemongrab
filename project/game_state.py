@@ -81,15 +81,17 @@ def enter():
     global map_img
     global clear_img
     global game_clear
-
+    global over_img
+    global game_over
 
     global_parameters.global_bgm.stop_bgm('title')
     global_parameters.global_bgm.play_bgm('game')
 
-
     game_clear = False
-
     clear_img = load_image('clear.png')
+
+    game_over = False
+    over_img = load_image('over.png')
 
     real_back = load_image('game_back.png')
     UI_init()
@@ -173,8 +175,6 @@ def enter():
 
     map_img = tile_class.back()
 
-
-
 def exit():
     global real_back
     global main_pointer
@@ -257,7 +257,6 @@ def handle_events():
                 if event.key == SDLK_SPACE:
                     space_down = False
 
-
 def draw():
     global real_back
     global tiles
@@ -290,6 +289,8 @@ def draw():
 
     if game_clear:
         clear_img.draw(500, 350, 1000, 700)
+    elif game_over:
+        over_img.draw(500, 350, 1000, 700)
 
     update_canvas()
     pass
@@ -310,6 +311,8 @@ def update(frame_time):
     global f_bullet_time
     global b_bullet_time
     global space_down
+    global game_over
+    global logo_time
 
     if b_bullet_time:
         f_bullet_time += frame_time
@@ -322,14 +325,19 @@ def update(frame_time):
         if player.mp < 0:
             space_down = False
 
-    if game_clear:
-        global logo_time
+    if game_over:
         if (logo_time > 3):
             logo_time = 0
             game_framework.change_state((main_state))
         delay(0.01)
         logo_time += 0.01
 
+    elif game_clear:
+        if (logo_time > 3):
+            logo_time = 0
+            game_framework.change_state((main_state))
+        delay(0.01)
+        logo_time += 0.01
 
     else:
         inter_w, inter_h = 0, 0
@@ -412,7 +420,8 @@ def update(frame_time):
                 enemy.camera_update(inter_w, inter_h)
 
         if player.return_hp() <= 0:
-            pass
+            delay(0.05)
+            game_over = True
 
         if collect_lemon == goal_lemon:
             delay(0.05)
@@ -421,14 +430,11 @@ def update(frame_time):
 
     pass
 
-
 def pause():
     pass
 
-
 def resume():
     pass
-
 
 def UI_init():
     global option_but
@@ -518,9 +524,6 @@ def UI_exit():
     del hp_bar_img
     del mp_bar_img
     pass
-
-
-
 
 def collision(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
