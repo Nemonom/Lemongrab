@@ -49,6 +49,9 @@ map_img = None
 clear_img = None
 game_clear = False
 
+over_img = None
+game_over = False
+
 logo_time = 0
 
 f_bullet_time = 0
