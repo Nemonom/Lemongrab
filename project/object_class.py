@@ -60,7 +60,7 @@ class enemy:
 
     def __init__(self, x, y):
         if enemy.img == None:
-            enemy.img = load_image('enemy.png')
+            enemy.img = load_image('e1.png')
         enemy.size_x, enemy.size_y = global_parameters.mon_size_x, global_parameters.mon_size_y
         self.m_x, self.m_y = x, y
         self.hp = global_parameters.mon_hp
@@ -74,7 +74,7 @@ class enemy:
         self.m_y += camera_y
 
     def update(self, frame_time, player_x, player_y):
-        self.angle = math.atan2((self.m_y - global_parameters.height / 2), (self.m_x - global_parameters.width / 2))
+        self.angle = math.atan2((-self.m_y + global_parameters.height / 2), (-self.m_x + global_parameters.width / 2))
         if self.state == enemy.RELAX:
             pass
         elif self.state == enemy.CHASE:
@@ -94,7 +94,7 @@ class enemy:
 
     def draw(self):
         if self.in_camera_range():
-            enemy.img.draw(self.m_x, self.m_y, enemy.size_x, enemy.size_x)
+            enemy.img.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
 
     def get_bb(self):
         return self.m_x - enemy.size_x / 2, self.m_y - enemy.size_x / 2 \

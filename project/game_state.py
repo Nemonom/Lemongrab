@@ -276,13 +276,12 @@ def draw():
     map_img.draw()
 
     player.draw()
-    for bullet in bullets:
-        bullet.draw()
     for item in items:
         item.draw()
     for enemy in enemys:
         enemy.draw()
-
+    for bullet in bullets:
+        bullet.draw()
     UI_draw()
     option_but.draw()
     main_pointer.draw(1)
@@ -313,6 +312,8 @@ def update(frame_time):
     global space_down
     global game_over
     global logo_time
+
+    player.control_mp('+', 0.01)
 
     if b_bullet_time:
         f_bullet_time += frame_time
@@ -371,14 +372,15 @@ def update(frame_time):
                     items.remove(item)
 
         for enemy in enemys:
-            #if enemy.in_camera_range():
-            #    enemy.state = enemy.CHASE
-            #    if collision(enemy, player):
-            #        enemy.state = enemy.ATTACK
-            #        player_hurt = True
-            #else:
-            #    enemy.state = enemy.RELAX
-            #enemy.update(frame_time, global_parameters.width/2, global_parameters.height/2)
+            if enemy.in_camera_range():
+                enemy.state = enemy.CHASE
+                if collision(enemy, player):
+                    enemy.state = enemy.ATTACK
+                    player.control_hp('-', 0.1)
+                    player_hurt = True
+            else:
+                enemy.state = enemy.RELAX
+            enemy.update(frame_time, global_parameters.width/2, global_parameters.height/2)
             enemy.camera_update(camera.move_x, camera.move_y)
 
         for bullet in bullets:
