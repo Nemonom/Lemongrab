@@ -424,11 +424,12 @@ def update(frame_time):
         if player.return_hp() <= 0:
             delay(0.05)
             game_over = True
+            global_parameters.global_snd.play_snd('over')
 
         if collect_lemon == goal_lemon:
             delay(0.05)
             game_clear = True
-
+            global_parameters.global_snd.play_snd('yell')
 
     pass
 

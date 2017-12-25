@@ -79,7 +79,7 @@ class enemy:
         self.m_y += camera_y
 
     def update(self, frame_time, player_x, player_y):
-        self.frame = (self.frame+1)%3
+        self.frame = (self.frame+0.1)%3
 
         self.angle = math.atan2((-self.m_y + global_parameters.height / 2), (-self.m_x + global_parameters.width / 2))
         if self.state == enemy.RELAX:
@@ -104,11 +104,11 @@ class enemy:
 
     def draw(self):
         if self.in_camera_range():
-            if self.frame == 0:
+            if self.frame >= 0 and self.frame < 1:
                 enemy.img0.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
-            elif self.frame == 1:
+            elif self.frame >= 1 and self.frame < 2:
                 enemy.img1.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
-            elif self.frame == 2:
+            elif self.frame >= 2 and self.frame < 3:
                 enemy.img2.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
 
     def get_bb(self):
