@@ -1,6 +1,5 @@
 from pico2d import *
 import random
-
 import button_class
 import camera_class
 import game_framework
@@ -9,6 +8,8 @@ import main_state
 import mouse_pointer
 import tile_class
 import object_class
+import pause_state
+
 from tileset import TileSet as wholetile
 from tileset import TileMap as tilemap
 
@@ -227,7 +228,7 @@ def handle_events():
 
             if event.button == SDL_BUTTON_LEFT:
                 if option_but.get_mouse_on():
-                    game_framework.change_state(main_state)
+                    game_framework.push_state(pause_state)
                 else:
                     if event.type == SDL_MOUSEBUTTONDOWN:
                         if b_bullet_time == False:
@@ -258,6 +259,15 @@ def handle_events():
                     space_down = False
 
 def draw():
+    clear_canvas()
+    hide_cursor()
+
+    game_draw()
+
+    update_canvas()
+    pass
+
+def game_draw():
     global real_back
     global tiles
     global main_pointer
@@ -270,8 +280,6 @@ def draw():
     global map_img
     global game_clear
 
-    clear_canvas()
-    hide_cursor()
     real_back.draw(500, 350, 1000, 700)
     map_img.draw()
 
@@ -290,9 +298,6 @@ def draw():
         clear_img.draw(500, 350, 1000, 700)
     elif game_over:
         over_img.draw(500, 350, 1000, 700)
-
-    update_canvas()
-    pass
 
 def update(frame_time):
     global camera
