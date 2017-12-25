@@ -55,31 +55,41 @@ class player:
 #enemy class
 class enemy:
     size_x, size_y = None, None
-    img = None
+    img0, img1, img2 = None, None, None
     RELAX, CHASE, ATTACK = 0, 1, 2
 
     def __init__(self, x, y):
-        if enemy.img == None:
-            enemy.img = load_image('e1.png')
+        if enemy.img0 == None:
+            enemy.img0 = load_image('e1.png')
+        if enemy.img1 == None:
+            enemy.img1 = load_image('e2.png')
+        if enemy.img2 == None:
+            enemy.img2 = load_image('e3.png')
+
         enemy.size_x, enemy.size_y = global_parameters.mon_size_x, global_parameters.mon_size_y
         self.m_x, self.m_y = x, y
         self.hp = global_parameters.mon_hp
         self.att = global_parameters.mon_att
-        self.spd = global_parameters.MON_RUN_SPEED_PPS * (global_parameters.game_level+1)
+        self.spd = global_parameters.MON_RUN_SPEED_PPS * (global_parameters.game_level+1) + random.randint(0, 200)
         self.state = enemy.RELAX
-        self.att_timer = 0
+        self.frame =  random.randint(0, 2)
 
     def camera_update(self, camera_x, camera_y):
         self.m_x += camera_x
         self.m_y += camera_y
 
     def update(self, frame_time, player_x, player_y):
+        self.frame = (self.frame+1)%3
+
         self.angle = math.atan2((-self.m_y + global_parameters.height / 2), (-self.m_x + global_parameters.width / 2))
         if self.state == enemy.RELAX:
             pass
         elif self.state == enemy.CHASE:
-            self.m_x += math.cos(self.angle) * frame_time * global_parameters.MON_RUN_SPEED_PPS
-            self.m_y += math.sin(self.angle) * frame_time * global_parameters.MON_RUN_SPEED_PPS
+            self.m_x += math.cos(self.angle) * frame_time\
+                        * global_parameters.MON_RUN_SPEED_PPS * (1 + random.randint(0, global_parameters.game_level*10)/100)
+
+            self.m_y += math.sin(self.angle) * frame_time\
+                        * global_parameters.MON_RUN_SPEED_PPS * (1 + random.randint(0, global_parameters.game_level*10)/100)
             pass
         elif self.state == enemy.ATTACK:
             pass
@@ -94,7 +104,12 @@ class enemy:
 
     def draw(self):
         if self.in_camera_range():
-            enemy.img.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
+            if self.frame == 0:
+                enemy.img0.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
+            elif self.frame == 1:
+                enemy.img1.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
+            elif self.frame == 2:
+                enemy.img2.rotate_draw(self.angle, self.m_x, self.m_y, enemy.size_x, enemy.size_x)
 
     def get_bb(self):
         return self.m_x - enemy.size_x / 2, self.m_y - enemy.size_x / 2 \
