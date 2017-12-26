@@ -77,6 +77,7 @@ def handle_events():
                 if exit_but.get_mouse_on():
                     global_parameters.global_snd.play_snd('button')
                     game_framework.quit()
+                    break
 
 
 def draw():

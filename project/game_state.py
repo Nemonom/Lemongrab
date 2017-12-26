@@ -137,7 +137,7 @@ def enter():
     item_cnt = 0
     while item_cnt < goal_lemon:
        put_ok = 0
-       #5100 6370
+       #1536m 1920m 100pixel = 30cm 1pixel = 1/30cm
        lemon = object_class.item(0, random.randint(20, 2000), random.randint(20, 2000))
        for tile in tiles:
            if collision(lemon, tile) and tile.state != 63:
@@ -220,7 +220,8 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
-
+        elif event.key == SDLK_q:
+            game_framework.change_state(main_state)
         elif event.type in (SDL_MOUSEBUTTONUP, SDL_MOUSEBUTTONDOWN, SDL_MOUSEMOTION):
             main_pointer.update(event.x, 700 - event.y)
             player.get_angle(event.x, 700 - event.y)
@@ -388,7 +389,9 @@ def update(frame_time):
             enemy.update(frame_time, global_parameters.width/2, global_parameters.height/2)
             enemy.camera_update(camera.move_x, camera.move_y)
 
+
         for bullet in bullets:
+            bullet_remove = False
             bullet.update(frame_time)
             bullet.camera_update(camera.move_x, camera.move_y)
 
@@ -401,16 +404,18 @@ def update(frame_time):
                             item = object_class.item(3, enemy.m_x, enemy.m_y)
                             items.append(item)
                         bullets.remove(bullet)
+                        bullet_remove = True
                         break
 
-
-            for tile in tiles:
-                if tile.in_camera_range() and collision(bullet, tile) and tile.state != 63:
+            if bullet_remove == False:
+                for tile in tiles:
+                    if tile.in_camera_range() and collision(bullet, tile) and tile.state != 63:
+                        bullets.remove(bullet)
+                        bullet_remove = True
+                        break
+            if bullet_remove == False:
+                if bullet.in_camera_range() == False:
                     bullets.remove(bullet)
-                    break
-
-            if bullet.in_camera_range() == False:
-                bullets.remove(bullet)
 
 
         map_img.update(camera.move_x, camera.move_y)
